@@ -1,8 +1,13 @@
+import ChatPanel from "./chatPanel/ChatPanel";
+import PersonalContent from "./PersonalContent";
+import PopularContent from "./PopularContent";
+
 const MainPage = () => {
     return (
         <div>
-            <div>Main page</div>
-            <div>Test process.env: {process.env.REACT_APP_TEST_VAR}</div>
+            <PopularContent />
+            <PersonalContent />
+            <ChatPanel />
         </div>
     )
 }
