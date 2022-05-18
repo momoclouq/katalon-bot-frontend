@@ -1,27 +1,36 @@
 import ChatText from "../../typo/chatText/ChatText";
 import bot_icon from "../../../static/images/bot_icon.png";
 import user_icon from "../../../static/images/user_icon.png";
+import Icon from "../botIcon/Icon";
+import ChatCard from "./ChatCard";
+import PaddingChatCardWrapper from "../../wrapper/paddingChatCardWrapper/PaddingChatCardWrapper";
 
-const Icon = ({url}) => {
-    return (
-        <div className="h-10 md:h-16 self-start">
-            <img className="h-full" src={url} alt="icon" />
-        </div>
-    )
-}
-
-const ChatBox = ({isBot, content}) => {
+const ChatBox = ({isBot, sentence, recommendations}) => {
+    const processedChatCards = (() => {
+        if (!recommendations) return "";
+        return recommendations.map((recommendation, index) => {
+            return <PaddingChatCardWrapper value="p-1">
+                    <ChatCard title={recommendation.title} url={recommendation.url} key={"card " + index} />
+                </PaddingChatCardWrapper>
+        })
+    })
 
     if (isBot) return (
-        <div className="w-fit p-1 self-start flex">
-            <Icon url={bot_icon} />
-            <ChatText case="bot">{content}</ChatText>
+        <div className="w-fit p-1 self-start flex flex-wrap">
+            <div className="grow flex">
+                <Icon url={bot_icon} />
+                <ChatText case="bot">{sentence}</ChatText>
+            </div>
+
+            <div className="flex flex-wrap p-3">
+                {processedChatCards()}
+            </div>
         </div>
     )
 
     return (
         <div className="w-fit p-1 self-end flex">
-            <ChatText case="user">{content}</ChatText>
+            <ChatText case="user">{sentence}</ChatText>
             <Icon url={user_icon} />
         </div>
     )

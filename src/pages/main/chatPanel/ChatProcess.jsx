@@ -2,17 +2,20 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ChatBox from "../../../components/chat/chatBox/ChatBox";
 import ChatContainer from "../../../components/chat/chatContainer/ChatContainer";
+import ChatError from "../../../components/chat/chatError/ChatError";
+import ChatLoading from "../../../components/chat/chatLoading/ChatLoading";
 import { useGetIntentRecognitionWithQueryQuery } from "../../../redux/api/intentRecognitionAPI";
 import { useGetSemanticSearchWithQueryQuery } from "../../../redux/api/semanticSearchAPI";
 import { addToHistory, selectHistory } from "../../../redux/slice/chat/chatSlice";
+import { processIntentData, processSemanticData } from "../../../utils/data-transform";
 
 const ChatInput = ({submitQuery, addUserChat}) => {
     const [currentQuery, setCurrentQuery] = useState("");
 
     const handleClick = () => {
-        addUserChat();
-        setCurrentQuery("");
+        addUserChat(currentQuery);
         submitQuery(currentQuery);
+        setCurrentQuery("");
     }
 
     const handleChange = (event) => {
@@ -29,25 +32,42 @@ const ChatInput = ({submitQuery, addUserChat}) => {
     )
 }
 
+const ChatDisplay = ({chatHistory}) => {
+    return chatHistory.map((chat, index) => {
+        return <ChatBox key={index} isBot={chat.isBot} sentence={chat.sentence} recommendations={chat.recommendations} />
+    })
+}
+
 const ChatProcess = () => {
     const [query, setQuery] = useState("");
     const chatHistory = useSelector(selectHistory);
     const dispatch = useDispatch();
 
-    const { data: semanticData, error: semanticError, isLoading: semanticLoading } = useGetSemanticSearchWithQueryQuery(query);
     const { data: intentData, error: intentError, isLoading: intentLoading } = useGetIntentRecognitionWithQueryQuery(query);
+    const { data: semanticData, error: semanticError, isLoading: semanticLoading } = useGetSemanticSearchWithQueryQuery(query);
 
-    if(query != "") {
-        console.log(semanticData);
-        console.log(intentData);
-    }
+    console.log("History: ", chatHistory);
 
-    const addUserChatToHistory = () => {
-        const contentVal = query;
+    useEffect(() => {
+        if (intentData && query){
+            let formattedData = processIntentData(intentData);
+               
+            dispatch(addToHistory(formattedData))
+        }
+    }, [intentData])
 
+    useEffect(() => {
+        if (semanticData && query){
+            let formattedData = processSemanticData(semanticData);
+
+            dispatch(addToHistory(formattedData))
+        }
+    }, [semanticData])
+
+    const addUserChatToHistory = (currentQuery) => {
         dispatch(addToHistory({
             isBot: false,
-            content: contentVal
+            sentence: currentQuery
         }))
 
         setQuery("");
@@ -55,9 +75,10 @@ const ChatProcess = () => {
 
     return (
         <ChatContainer>
-            <ChatBox isBot={true} content="Hi, I'm Katalon Chatbot. You can ask me anything about Katalon Documentation" />
-            <ChatBox isBot={false} content="I want to install Katalon devops, show me how" />
-            <ChatBox isBot={true} content="Here are the results" />
+            <ChatBox isBot={true} sentence="Hi, I'm Katalon Chatbot. You can ask me anything about Katalon Documentation" />
+            <ChatDisplay chatHistory={chatHistory}/>
+            { (semanticLoading || intentLoading) ? <ChatLoading /> : "" }
+            { (semanticError || intentError) ? <ChatError /> : "" }
             <ChatInput submitQuery={setQuery} addUserChat={addUserChatToHistory}/>
         </ChatContainer>
     )

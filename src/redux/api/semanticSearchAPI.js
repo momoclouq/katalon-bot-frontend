@@ -8,7 +8,7 @@ export const semanticSearchApi = createApi({
     endpoints: (builder) => ({
       getSemanticSearchWithQuery: builder.query({
         query: (query) => ({
-              url: "",
+              url: "/",
               params: {
                   query: query
               }
