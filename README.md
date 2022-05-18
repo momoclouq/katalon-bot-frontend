@@ -1,6 +1,12 @@
 # Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app)
+
+## Data for .env (local set up):
+
+REACT_APP_TEST_VAR = 'Katalon'  
+REACT_APP_SEMANTIC_SEARCH_URL = 'https://katalonsemanticsearch.com'  
+REACT_APP_INTENT_RECOGNITION_URL = 'https://jzenkd2s01.execute-api.us-east-1.amazonaws.com/default/intentRecognitionInvocation'  
 
 ## Available Scripts
 
