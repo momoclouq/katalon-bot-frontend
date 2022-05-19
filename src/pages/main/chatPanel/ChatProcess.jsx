@@ -48,31 +48,29 @@ const ChatProcess = () => {
     const { data: intentData, error: intentError, isLoading: intentLoading } = useGetIntentRecognitionWithQueryQuery(query);
     const { data: semanticData, error: semanticError, isLoading: semanticLoading } = useGetSemanticSearchWithQueryQuery(query);
 
-    console.log("History: ", chatHistory);
-
     useEffect(() => {
         if (intentData && query){
             let formattedData = processIntentData(intentData);
                
-            dispatch(addToHistory(formattedData))
+            dispatch(addToHistory(formattedData));
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [intentData])
+    }, [intentData]);
 
     useEffect(() => {
         if (semanticData && query){
             let formattedData = processSemanticData(semanticData);
 
-            dispatch(addToHistory(formattedData))
+            dispatch(addToHistory(formattedData));
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [semanticData])
+    }, [semanticData]);
 
     const addUserChatToHistory = (currentQuery) => {
         dispatch(addToHistory({
             isBot: false,
             sentence: currentQuery
-        }))
+        }));
 
         setQuery("");
     }

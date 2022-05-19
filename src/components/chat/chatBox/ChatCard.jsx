@@ -4,7 +4,7 @@ import Icon from "../botIcon/Icon";
 const ChatCard = ({title, url}) => {
     return (
         <a href={url}>
-            <div className="border rounded-lg">
+            <div className="border rounded-lg w-64 ml-12">
                 <div className="p-3 flex justify-center items-center">
                     <Icon url={katalon_icon} />
                 </div>

@@ -4,7 +4,7 @@ import PopularContent from "./PopularContent";
 
 const MainPage = () => {
     return (
-        <div>
+        <div className="w-2/3 mx-auto">
             <PopularContent />
             <PersonalContent />
             <ChatPanel />

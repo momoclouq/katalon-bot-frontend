@@ -9,14 +9,16 @@ const ChatBox = ({isBot, sentence, recommendations}) => {
     const processedChatCards = (() => {
         if (!recommendations) return "";
         return recommendations.map((recommendation, index) => {
-            return <PaddingChatCardWrapper value="p-1">
+            return (
+                <PaddingChatCardWrapper value="p-1">
                     <ChatCard title={recommendation.title} url={recommendation.url} key={"card " + index} />
                 </PaddingChatCardWrapper>
-        })
-    })
+            )
+        });
+    });
 
     if (isBot) return (
-        <div className="w-fit p-1 self-start flex flex-wrap">
+        <div className="w-fit p-1 self-start">
             <div className="grow flex">
                 <Icon url={bot_icon} />
                 <ChatText case="bot">{sentence}</ChatText>
@@ -26,14 +28,14 @@ const ChatBox = ({isBot, sentence, recommendations}) => {
                 {processedChatCards()}
             </div>
         </div>
-    )
+    );
 
     return (
         <div className="w-fit p-1 self-end flex">
             <ChatText case="user">{sentence}</ChatText>
             <Icon url={user_icon} />
         </div>
-    )
+    );
 }
 
 export default ChatBox;
