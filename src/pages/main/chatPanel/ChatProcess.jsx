@@ -27,7 +27,9 @@ const ChatInput = ({submitQuery, addUserChat}) => {
             <div className="border border-2 rounded-full px-3 py-1 grow md:max-w-md mr-2">
                 <input value={currentQuery} onChange={handleChange} className="w-full p-2 custom-chat-input" type="text" placeholder="Type anything to chatbot" />
             </div>
-            <button onClick={handleClick} className="bg-sky-400 rounded-full px-3"><img className="h-5" src="https://img.icons8.com/ios-glyphs/60/ffffff/paper-plane.png"/></button>
+            <button onClick={handleClick} className="bg-sky-400 rounded-full px-3">
+                <img className="h-5" alt="Send Icon" src="https://img.icons8.com/ios-glyphs/60/ffffff/paper-plane.png"/>
+            </button>
         </div>
     )
 }
@@ -54,6 +56,7 @@ const ChatProcess = () => {
                
             dispatch(addToHistory(formattedData))
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [intentData])
 
     useEffect(() => {
@@ -62,6 +65,7 @@ const ChatProcess = () => {
 
             dispatch(addToHistory(formattedData))
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [semanticData])
 
     const addUserChatToHistory = (currentQuery) => {
