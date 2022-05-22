@@ -40,7 +40,9 @@ const ChatInput = ({submitQuery, addUserChat}) => {
                     onKeyDown={handleKeyDown}
                 />
             </div>
-            <button onClick={handleClick} className="bg-sky-400 rounded-full px-3"><img className="h-5" src="https://img.icons8.com/ios-glyphs/60/ffffff/paper-plane.png"/></button>
+            <button onClick={handleClick} className="bg-sky-400 rounded-full px-3">
+                <img className="h-5" alt="Send Icon" src="https://img.icons8.com/ios-glyphs/60/ffffff/paper-plane.png"/>
+            </button>
         </div>
     )
 }
@@ -63,7 +65,7 @@ const ChatProcess = () => {
         if (intentData && query){
             let formattedData = processIntentData(intentData);
                
-            dispatch(addToHistory(formattedData))
+            dispatch(addToHistory(formattedData));
         }
     }, [intentData]);
 
@@ -71,7 +73,7 @@ const ChatProcess = () => {
         if (semanticData && query){
             let formattedData = processSemanticData(semanticData);
 
-            dispatch(addToHistory(formattedData))
+            dispatch(addToHistory(formattedData));
         }
     }, [semanticData]);
 
@@ -79,7 +81,7 @@ const ChatProcess = () => {
         dispatch(addToHistory({
             isBot: false,
             sentence: currentQuery
-        }))
+        }));
 
         setQuery("");
     }
