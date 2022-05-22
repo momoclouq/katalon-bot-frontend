@@ -4,12 +4,13 @@ import ChatBox from "../../../components/chat/chatBox/ChatBox";
 import ChatContainer from "../../../components/chat/chatContainer/ChatContainer";
 import ChatError from "../../../components/chat/chatError/ChatError";
 import ChatLoading from "../../../components/chat/chatLoading/ChatLoading";
+import useScrollToElement from "../../../hooks/scrollToEle/ScrollToElement";
 import { useGetIntentRecognitionWithQueryQuery } from "../../../redux/api/intentRecognitionAPI";
 import { useGetSemanticSearchWithQueryQuery } from "../../../redux/api/semanticSearchAPI";
 import { addToHistory, selectHistory } from "../../../redux/slice/chat/chatSlice";
 import { processIntentData, processSemanticData } from "../../../utils/data-transform";
 
-const ChatInput = ({submitQuery, addUserChat}) => {
+const ChatInput = ({submitQuery, addUserChat, scrollToView}) => {
     const [currentQuery, setCurrentQuery] = useState("");
 
     const handleClick = () => {
@@ -60,12 +61,15 @@ const ChatProcess = () => {
 
     const { data: intentData, error: intentError, isLoading: intentLoading } = useGetIntentRecognitionWithQueryQuery(query);
     const { data: semanticData, error: semanticError, isLoading: semanticLoading } = useGetSemanticSearchWithQueryQuery(query);
+    const { createAnchorHere, scrollToView } = useScrollToElement();
 
     useEffect(() => {
         if (intentData && query){
             let formattedData = processIntentData(intentData);
                
             dispatch(addToHistory(formattedData));
+
+            setTimeout(scrollToView, 0);
         }
     }, [intentData]);
 
@@ -73,14 +77,16 @@ const ChatProcess = () => {
         if (semanticData && query){
             let formattedData = processSemanticData(semanticData);
 
-            dispatch(addToHistory(formattedData));
+            dispatch(addToHistory( formattedData ));
+
+            setTimeout(scrollToView, 0);
         }
     }, [semanticData]);
 
     const addUserChatToHistory = (currentQuery) => {
         dispatch(addToHistory({
             isBot: false,
-            sentence: currentQuery
+            sentence: currentQuery,
         }));
 
         setQuery("");
@@ -92,7 +98,8 @@ const ChatProcess = () => {
             <ChatDisplay chatHistory={chatHistory}/>
             { (semanticLoading || intentLoading) ? <ChatLoading /> : "" }
             { (semanticError || intentError) ? <ChatError /> : "" }
-            <ChatInput submitQuery={setQuery} addUserChat={addUserChatToHistory}/>
+            <ChatInput submitQuery={setQuery} addUserChat={addUserChatToHistory} scrollToView={scrollToView}/>
+            { createAnchorHere() }
         </ChatContainer>
     )
 }
