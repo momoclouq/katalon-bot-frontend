@@ -9,7 +9,7 @@ const ChatBox = ({isBot, sentence, recommendations}) => {
     const processedChatCards = (() => {
         if (!recommendations) return "";
         return recommendations.map((recommendation, index) => {
-            return <PaddingChatCardWrapper value="p-1">
+            return <PaddingChatCardWrapper key={"chat wrapper: " + index} value="p-1">
                     <ChatCard title={recommendation.title} url={recommendation.url} key={"card " + index} />
                 </PaddingChatCardWrapper>
         })

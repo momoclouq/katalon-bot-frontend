@@ -18,6 +18,12 @@ const ChatInput = ({submitQuery, addUserChat}) => {
         setCurrentQuery("");
     }
 
+    const handleKeyDown = (event) => {
+        if(event.keyCode == 13){
+            handleClick();
+        }
+    }
+
     const handleChange = (event) => {
         setCurrentQuery(event.target.value);
     }
@@ -25,7 +31,14 @@ const ChatInput = ({submitQuery, addUserChat}) => {
     return (
         <div className="w-full self-end flex justify-end mt-2">
             <div className="border border-2 rounded-full px-3 py-1 grow md:max-w-md mr-2">
-                <input value={currentQuery} onChange={handleChange} className="w-full p-2 custom-chat-input" type="text" placeholder="Type anything to chatbot" />
+                <input 
+                    value={currentQuery} 
+                    onChange={handleChange} 
+                    className="w-full p-2 custom-chat-input" 
+                    type="text" 
+                    placeholder="Type anything to chatbot" 
+                    onKeyDown={handleKeyDown}
+                />
             </div>
             <button onClick={handleClick} className="bg-sky-400 rounded-full px-3"><img className="h-5" src="https://img.icons8.com/ios-glyphs/60/ffffff/paper-plane.png"/></button>
         </div>
@@ -34,7 +47,7 @@ const ChatInput = ({submitQuery, addUserChat}) => {
 
 const ChatDisplay = ({chatHistory}) => {
     return chatHistory.map((chat, index) => {
-        return <ChatBox key={index} isBot={chat.isBot} sentence={chat.sentence} recommendations={chat.recommendations} />
+        return <ChatBox key={"box: " + index} isBot={chat.isBot} sentence={chat.sentence} recommendations={chat.recommendations} />
     })
 }
 
@@ -46,15 +59,13 @@ const ChatProcess = () => {
     const { data: intentData, error: intentError, isLoading: intentLoading } = useGetIntentRecognitionWithQueryQuery(query);
     const { data: semanticData, error: semanticError, isLoading: semanticLoading } = useGetSemanticSearchWithQueryQuery(query);
 
-    console.log("History: ", chatHistory);
-
     useEffect(() => {
         if (intentData && query){
             let formattedData = processIntentData(intentData);
                
             dispatch(addToHistory(formattedData))
         }
-    }, [intentData])
+    }, [intentData]);
 
     useEffect(() => {
         if (semanticData && query){
@@ -62,7 +73,7 @@ const ChatProcess = () => {
 
             dispatch(addToHistory(formattedData))
         }
-    }, [semanticData])
+    }, [semanticData]);
 
     const addUserChatToHistory = (currentQuery) => {
         dispatch(addToHistory({
