@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/katalon-bot-frontend/static/css/main.9fbb0b9a.css",
+    "main.js": "/katalon-bot-frontend/static/js/main.bbabd8df.js",
+    "static/media/katalon_icon.png": "/katalon-bot-frontend/static/media/katalon_icon.54e27d7afae42961485a.png",
+    "static/media/bot_icon.png": "/katalon-bot-frontend/static/media/bot_icon.4aa552f228885a8681d0.png",
+    "static/media/user_icon.png": "/katalon-bot-frontend/static/media/user_icon.89aaeb263a46bd353262.png",
+    "index.html": "/katalon-bot-frontend/index.html",
+    "main.9fbb0b9a.css.map": "/katalon-bot-frontend/static/css/main.9fbb0b9a.css.map",
+    "main.bbabd8df.js.map": "/katalon-bot-frontend/static/js/main.bbabd8df.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.9fbb0b9a.css",
+    "static/js/main.bbabd8df.js"
+  ]
+}
