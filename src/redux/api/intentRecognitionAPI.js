@@ -7,14 +7,16 @@ export const intentRecognitionApi = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: baseURL }),
   endpoints: (builder) => ({
     getIntentRecognitionWithQuery: builder.query({
-      query: (query) => ({
-            url: "/",
-            params: {
-                query: query
-            }
-      }),
+      query: (query) => {
+        return {
+          url: "/",
+          params: {
+              query: query
+          }
+        }
+      }  
     }),
   }),
-})
+});
 
 export const { useGetIntentRecognitionWithQueryQuery } = intentRecognitionApi;

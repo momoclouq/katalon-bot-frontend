@@ -7,12 +7,14 @@ export const semanticSearchApi = createApi({
     baseQuery: fetchBaseQuery({ baseUrl: baseURL }),
     endpoints: (builder) => ({
       getSemanticSearchWithQuery: builder.query({
-        query: (query) => ({
-              url: "/",
-              params: {
-                  query: query
-              }
-        }),
+        query: (query) => {
+          return {
+            url: "/",
+            params: {
+                query: query
+            }
+          }
+        } 
       }),
     }),
   })

@@ -1,3 +1,4 @@
+import { current } from "@reduxjs/toolkit";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ChatBox from "../../../components/chat/chatBox/ChatBox";
@@ -7,7 +8,7 @@ import ChatLoading from "../../../components/chat/chatLoading/ChatLoading";
 import useScrollToElement from "../../../hooks/scrollToEle/ScrollToElement";
 import { useGetIntentRecognitionWithQueryQuery } from "../../../redux/api/intentRecognitionAPI";
 import { useGetSemanticSearchWithQueryQuery } from "../../../redux/api/semanticSearchAPI";
-import { addToHistory, selectHistory } from "../../../redux/slice/chat/chatSlice";
+import { addToHistory, resetAnswer, selectCurrentAnswer, selectHistory, updateIntent, updateSemantic } from "../../../redux/slice/chat/chatSlice";
 import { processIntentData, processSemanticData } from "../../../utils/data-transform";
 
 const ChatInput = ({submitQuery, addUserChat, scrollToView}) => {
@@ -82,6 +83,28 @@ const ChatProcess = () => {
             setTimeout(scrollToView, 0);
         }
     }, [semanticData]);
+
+    // useEffect(() => {
+    //     if (intentData && query){
+    //         dispatch(updateIntent(intentData));
+    //     }
+    // }, [intentData]);
+
+    // useEffect(() => {
+    //     if (semanticData && query){
+    //         dispatch(updateSemantic( semanticData ));
+    //     }
+    // }, [semanticData]);
+
+    // useEffect(() => {
+    //     if(semantic && intent){
+    //         dispatch(addToHistory( processIntentData(intent) ));
+    //         dispatch(addToHistory( processSemanticData(semantic) ));
+    //         resetAnswer();
+
+    //         setTimeout(scrollToView, 0);
+    //     }
+    // }, [semantic, intent])
 
     const addUserChatToHistory = (currentQuery) => {
         dispatch(addToHistory({
