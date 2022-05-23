@@ -1,4 +1,10 @@
 export const processIntentData = ({_id, id, response, carousel}) => {
+    if (id === "fallback") return {
+        isBot: true,
+        sentence: response,
+        recommendations: null
+    }
+
     return {
         isBot: true,
         sentence: response,

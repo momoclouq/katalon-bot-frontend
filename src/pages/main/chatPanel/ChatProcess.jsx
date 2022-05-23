@@ -1,21 +1,29 @@
+import { current } from "@reduxjs/toolkit";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ChatBox from "../../../components/chat/chatBox/ChatBox";
 import ChatContainer from "../../../components/chat/chatContainer/ChatContainer";
 import ChatError from "../../../components/chat/chatError/ChatError";
 import ChatLoading from "../../../components/chat/chatLoading/ChatLoading";
+import useScrollToElement from "../../../hooks/scrollToEle/ScrollToElement";
 import { useGetIntentRecognitionWithQueryQuery } from "../../../redux/api/intentRecognitionAPI";
 import { useGetSemanticSearchWithQueryQuery } from "../../../redux/api/semanticSearchAPI";
-import { addToHistory, selectHistory } from "../../../redux/slice/chat/chatSlice";
+import { addToHistory, resetAnswer, selectCurrentAnswer, selectHistory, updateIntent, updateSemantic } from "../../../redux/slice/chat/chatSlice";
 import { processIntentData, processSemanticData } from "../../../utils/data-transform";
 
-const ChatInput = ({submitQuery, addUserChat}) => {
+const ChatInput = ({submitQuery, addUserChat, scrollToView}) => {
     const [currentQuery, setCurrentQuery] = useState("");
 
     const handleClick = () => {
         addUserChat(currentQuery);
         submitQuery(currentQuery);
         setCurrentQuery("");
+    }
+
+    const handleKeyDown = (event) => {
+        if(event.keyCode == 13){
+            handleClick();
+        }
     }
 
     const handleChange = (event) => {
@@ -25,7 +33,14 @@ const ChatInput = ({submitQuery, addUserChat}) => {
     return (
         <div className="w-full self-end flex justify-end mt-2">
             <div className="border border-2 rounded-full px-3 py-1 grow md:max-w-md mr-2">
-                <input value={currentQuery} onChange={handleChange} className="w-full p-2 custom-chat-input" type="text" placeholder="Type anything to chatbot" />
+                <input 
+                    value={currentQuery} 
+                    onChange={handleChange} 
+                    className="w-full p-2 custom-chat-input" 
+                    type="text" 
+                    placeholder="Type anything to chatbot" 
+                    onKeyDown={handleKeyDown}
+                />
             </div>
             <button onClick={handleClick} className="bg-sky-400 rounded-full px-3">
                 <img className="h-5" alt="Send Icon" src="https://img.icons8.com/ios-glyphs/60/ffffff/paper-plane.png"/>
@@ -36,7 +51,7 @@ const ChatInput = ({submitQuery, addUserChat}) => {
 
 const ChatDisplay = ({chatHistory}) => {
     return chatHistory.map((chat, index) => {
-        return <ChatBox key={index} isBot={chat.isBot} sentence={chat.sentence} recommendations={chat.recommendations} />
+        return <ChatBox key={"box: " + index} isBot={chat.isBot} sentence={chat.sentence} recommendations={chat.recommendations} />
     })
 }
 
@@ -47,29 +62,54 @@ const ChatProcess = () => {
 
     const { data: intentData, error: intentError, isLoading: intentLoading } = useGetIntentRecognitionWithQueryQuery(query);
     const { data: semanticData, error: semanticError, isLoading: semanticLoading } = useGetSemanticSearchWithQueryQuery(query);
+    const { createAnchorHere, scrollToView } = useScrollToElement();
 
     useEffect(() => {
         if (intentData && query){
             let formattedData = processIntentData(intentData);
                
             dispatch(addToHistory(formattedData));
+
+            setTimeout(scrollToView, 0);
         }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [intentData]);
 
     useEffect(() => {
         if (semanticData && query){
             let formattedData = processSemanticData(semanticData);
 
-            dispatch(addToHistory(formattedData));
+            dispatch(addToHistory( formattedData ));
+
+            setTimeout(scrollToView, 0);
         }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [semanticData]);
+
+    // useEffect(() => {
+    //     if (intentData && query){
+    //         dispatch(updateIntent(intentData));
+    //     }
+    // }, [intentData]);
+
+    // useEffect(() => {
+    //     if (semanticData && query){
+    //         dispatch(updateSemantic( semanticData ));
+    //     }
+    // }, [semanticData]);
+
+    // useEffect(() => {
+    //     if(semantic && intent){
+    //         dispatch(addToHistory( processIntentData(intent) ));
+    //         dispatch(addToHistory( processSemanticData(semantic) ));
+    //         resetAnswer();
+
+    //         setTimeout(scrollToView, 0);
+    //     }
+    // }, [semantic, intent])
 
     const addUserChatToHistory = (currentQuery) => {
         dispatch(addToHistory({
             isBot: false,
-            sentence: currentQuery
+            sentence: currentQuery,
         }));
 
         setQuery("");
@@ -81,7 +121,8 @@ const ChatProcess = () => {
             <ChatDisplay chatHistory={chatHistory}/>
             { (semanticLoading || intentLoading) ? <ChatLoading /> : "" }
             { (semanticError || intentError) ? <ChatError /> : "" }
-            <ChatInput submitQuery={setQuery} addUserChat={addUserChatToHistory}/>
+            <ChatInput submitQuery={setQuery} addUserChat={addUserChatToHistory} scrollToView={scrollToView}/>
+            { createAnchorHere() }
         </ChatContainer>
     )
 }

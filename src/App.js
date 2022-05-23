@@ -11,8 +11,8 @@ function App() {
       <BrowserRouter>
         <div className="container mx-auto">
           <Routes>
-            <Route path="/" element={<MainPage />} />
-            <Route path="/customize" element={<CustomizePage />} />
+            <Route path="/katalon-bot-frontend" element={<MainPage />} />
+            <Route path="/katalon-bot-frontend/customize" element={<CustomizePage />} />
           </Routes>
         </div>
       </BrowserRouter>
