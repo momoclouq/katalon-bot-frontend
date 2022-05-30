@@ -1,10 +1,10 @@
-import {  Slide} from "pure-react-carousel";
-const PaddingCardWrapper = ({children, index_value}) => {
+import 'tw-elements';
+const PaddingCardWrapper = ({children}) => {
     return (
         //<div className={`${value} basis-full sm:basis-1/2 lg:basis-2/4`}>
-        <Slide className="duration-200 hover:opacity-90 hover:shadow-inner hover:shadow-2xl hover:border-black-300 " index={index_value}>
+        <div className="carousel-inner rounded shadow sm:shadow-md md:shadow-lg lg:shadow-xl relative w-full overflow-hidden">
             {children}
-        </Slide>
+        </div>
     )
 }
 

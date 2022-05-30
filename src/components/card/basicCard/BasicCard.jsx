@@ -1,11 +1,15 @@
-const BasicCard = ({image_index, title, link_address}) => {
+import 'tw-elements';
+const BasicCard = ({image_index, title, link_address ,description}) => {
     return (
-        <div className="flex flex-shrink-0 lg:h-80 md:h-64 sm:h-40 relative w-auto sm:w-auto">
-            <img src={`https://picsum.photos/200/300?random=${image_index}`} alt="black chair and white table" className="object-cover object-center w-full" />
-            <div className="bg-gray-800 bg-opacity-30 absolute w-full h-full p-6">
-                <div className="flex h-full items-end pb-8">
-                    <h3 className="text-center duration-200 hover:text-gray-300 text-xl lg:text-2xl font-semibold leading-5 lg:leading-6 text-white"><a href={link_address} target="_blank">{title}</a></h3>
-                </div>
+        <div className="carousel-item relative float-left w-full">
+            <img
+              src={`https://mdbootstrap.com/img/Photos/Slides/img%20(${image_index}).jpg`}
+              className="block w-full"
+              alt="..."
+            />
+            <div className="carousel-caption md:block absolute text-center">
+              <h5 className="hover:text-gray-300 duration-200 md:text-xl sm:text-sm"><a rel="noopener" href={link_address} target="_blank">{title}</a></h5>
+              <p className="md:text-base sm:text-xs">{description}</p>
             </div>
         </div>
     )
