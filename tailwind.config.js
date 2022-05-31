@@ -3,7 +3,11 @@ module.exports = {
     "./src/**/*.{js,jsx,ts,tsx,html}", './node_modules/tw-elements/dist/js/**/*.js',
   ],
   theme: {
-    extend: {},
+    extend: {
+      blur: {
+        xs: '3px',
+      }
+    },
   },
   plugins: [
     require('tw-elements/dist/plugin')
