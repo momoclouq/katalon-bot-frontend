@@ -2,7 +2,7 @@ import BasicCard from "../../components/card/basicCard/BasicCard";
 import BasicTitle from "../../components/typo/basicTitle/BasicTitle";
 import PaddingCardWrapper from "../../components/wrapper/paddingCardWrapper/PaddingCardWrapper";
 import BasicCarousel from "../../components/carousel/basicCarousel/BasicCarousel";
-import CardData from '../../static/data/CardData.json';
+import data from '../../static/data/CardData.json';
 import 'tw-elements';
 const PopularContent = () => {
     return (
@@ -13,7 +13,7 @@ const PopularContent = () => {
                     <BasicCarousel carousel_id="Popular_carousel">
                         <PaddingCardWrapper>
                         <BasicCard image_index={15} link_address={'https://katalon.com/'} title={'Katalon'} description={'Some representative placeholder content for the first slide.'} carousel_state={'active'}/>
-                            {CardData.CardData.map(each_data => {
+                            {data.CardData.map(each_data => {
                                 return(
                                 <BasicCard key={each_data.index} image_index={each_data.index} link_address={each_data.address} title={each_data.title} description={each_data.description}/>
                                 )

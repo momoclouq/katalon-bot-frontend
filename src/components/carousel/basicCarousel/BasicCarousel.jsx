@@ -1,6 +1,6 @@
 import 'tw-elements';
 import React from 'react';
-import CardData from '../../../static/data/CardData.json';
+import data from '../../../static/data/CardData.json';
 const BasicCarousel = ({children, carousel_id}) => {
     return (
         <>
@@ -15,7 +15,7 @@ const BasicCarousel = ({children, carousel_id}) => {
                               aria-current="true"
                               aria-label={`Slide 1`}
                             ></button>
-                   {CardData.CardData.map(each_data => {
+                   {data.CardData.map(each_data => {
                             return(
                               <button
                               type="button"
