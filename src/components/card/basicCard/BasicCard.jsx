@@ -26,14 +26,14 @@ function useHover() {
 const BasicCard = ({image_index, title, link_address ,description, carousel_state}) => {
   const [hoverRef, isHovered] = useHover();
     return (
-        <div className={`carousel-item ${carousel_state} relative float-left w-full`}>
+        <div ref={hoverRef} className={` carousel-item ${carousel_state} relative float-left w-full`}>
             <img
               src={`https://mdbootstrap.com/img/Photos/Slides/img%20(${image_index}).jpg`}
-              className={ `${isHovered ? "blur-xs brightness-75" : ""} hover:blur-xs hover:brightness-75 duration-200 block w-full`}
+              className={ `${isHovered ? "blur-xs brightness-75" : ""} duration-200 block w-full`}
               alt="..."
             />
             <div className="carousel-caption md:block absolute text-center">
-              <h5 className="font-medium hover:text-gray-300 duration-150 md:text-xl sm:text-sm"><a ref={hoverRef} rel="noopener" href={link_address} target="_blank">{title}</a></h5>
+              <h5 className="font-medium hover:text-2xl duration-200 md:text-xl sm:text-base"><a rel="noopener" href={link_address} target="_blank">{title}</a></h5>
               <p className="md:text-base sm:text-xs">{description}</p>
             </div>
         </div>
