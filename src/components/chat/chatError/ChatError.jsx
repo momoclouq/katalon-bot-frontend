@@ -6,7 +6,7 @@ const ChatError = () => {
     return(
         <div className="w-fit p-1 self-start flex">
             <Icon url={bot_icon} />
-            <ChatText case="error">I could not process your input for some reasons .-.</ChatText>
+            <ChatText case="error">I could not process your input for some reasons</ChatText>
         </div>
     )
 }

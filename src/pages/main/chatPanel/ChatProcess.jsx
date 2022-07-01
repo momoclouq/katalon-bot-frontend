@@ -52,7 +52,7 @@ const ChatInput = ({submitQuery, addUserChat, scrollToView}) => {
 const ChatDisplay = ({chatHistory}) => {
     return chatHistory.map((chat, index) => {
         return <ChatBox key={"box: " + index} isBot={chat.isBot} sentence={chat.sentence} recommendations={chat.recommendations} />
-    })
+    });
 }
 
 const ChatProcess = () => {
@@ -83,28 +83,6 @@ const ChatProcess = () => {
             setTimeout(scrollToView, 0);
         }
     }, [semanticData]);
-
-    // useEffect(() => {
-    //     if (intentData && query){
-    //         dispatch(updateIntent(intentData));
-    //     }
-    // }, [intentData]);
-
-    // useEffect(() => {
-    //     if (semanticData && query){
-    //         dispatch(updateSemantic( semanticData ));
-    //     }
-    // }, [semanticData]);
-
-    // useEffect(() => {
-    //     if(semantic && intent){
-    //         dispatch(addToHistory( processIntentData(intent) ));
-    //         dispatch(addToHistory( processSemanticData(semantic) ));
-    //         resetAnswer();
-
-    //         setTimeout(scrollToView, 0);
-    //     }
-    // }, [semantic, intent])
 
     const addUserChatToHistory = (currentQuery) => {
         dispatch(addToHistory({
