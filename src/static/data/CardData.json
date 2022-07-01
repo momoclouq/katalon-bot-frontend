@@ -1,49 +1,42 @@
 {
     "CardData": [
         {
-        "button_index": 1,
          "index": 31,
          "address": "https://docs.katalon.com/katalon-studio/docs/index.html",
          "title": "Katalon MainPage",
          "description": "Katalon is the leading low-code test automation solution ."
         },
         {
-        "button_index": 2,
         "index": 1,
         "address": "https://docs.katalon.com/katalon-studio/docs/overview.html",
         "title": "Katalon Studio",
         "description": "Go low-code. Boost productivity. Ease scalability."
         },
         {
-        "button_index": 3,
          "index": 2,
          "address": "https://docs.katalon.com/katalon-studio/docs/intro-RE.html",
          "title": "Katalon Runtime Engine",
          "description": "Katalon Runtime Engine (KRE) is the test execution add-on of Katalon Studio."
         },
         {
-        "button_index": 4,
          "index": 22,
          "address": "https://docs.katalon.com/katalon-analytics/docs/overview.html",
          "title": "Katalon TestOps",
          "description": "TestOps provides a comprehensive orchestration solution."
         },
         {
-        "button_index": 5,
          "index": 4,
          "address": "https://docs.katalon.com/katalon-recorder/docs/overview.html",
          "title": "Katalon Recorder",
          "description": "A Selenium IDE-compatible record & playback tool for browser automation testing."
         },
         {
-        "button_index": 6,
         "index": 119,
          "address": "https://docs.katalon.com/katalium-framework/docs/katalium-framework-overview.html",
          "title": "Katalon Katalium Framework",
          "description": "A lightweight framework that provides a blueprint for test automation projects."
         },
         {
-        "button_index": 7,
          "index": 104,
          "address": "https://docs.katalon.com/katalon-testcloud/docs/testcloud-overview.html",
          "title": "Katalon TestCloud",
