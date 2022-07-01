@@ -4,29 +4,23 @@ import data from '../../../static/data/CardData.json';
 const BasicCarousel = ({children, carousel_id}) => {
     return (
         <>
-            {/* Carousel for desktop and large size devices */}
             <div id={`${carousel_id}`} className="carousel slide relative" data-bs-ride="carousel">
                 <div className="carousel-indicators absolute right-0 bottom-0 left-0 flex justify-center p-0 mb-4">
-                            <button
-                              type="button"
-                              data-bs-target={`#${carousel_id}`}
-                              data-bs-slide-to={`0`}
-                              className="active"
-                              aria-current="true"
-                              aria-label={`Slide 1`}
-                            ></button>
-                   {data.CardData.map(each_data => {
-                            return(
-                              <button
-                              type="button"
-                              data-bs-target={`#${carousel_id}`}
-                              data-bs-slide-to={`${each_data.button_index}`}
-                              className="active"
-                              aria-current="true"
-                              aria-label={`Slide ${each_data.button_index + 1}`}
-                            ></button>
-                            )
-                        })}
+                   {data.CardData.map((each_data, index) => {
+                      return(
+                        <button
+                          key={each_data.button_index}
+                          type="button"
+                          data-bs-target={`#${carousel_id}`}
+                          data-bs-slide-to={`${index}`}
+                          { ...(each_data.button_index == 1 && { 
+                            "className": "active",
+                            "aria-current": "true" 
+                          })}
+                          aria-label={`Slide ${index + 1}`}
+                      ></button>
+                      )
+                    })}
                 </div>
                     {children}
                 <button

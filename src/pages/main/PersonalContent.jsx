@@ -11,13 +11,18 @@ const PersonalContent = () => {
             <BasicTitle text="Just for you" />
             <div className="container mx-auto">
             <div className="flex items-center justify-center w-full h-full py-24 sm:py-8 px-4">
-                {/* Carousel for desktop and large size devices */}
                 <BasicCarousel carousel_id="Personal_Carousel">
                     <PaddingCardWrapper>
-                       <BasicCard image_index={15} link_address={'https://katalon.com/'} title={'Katalon'} description={'Some representative placeholder content for the first slide.'} carousel_state={'active'}/>
                         {data.CardData.map(each_data => {
                             return(
-                            <BasicCard key={each_data.index} image_index={each_data.index} link_address={each_data.address} title={each_data.title} description={each_data.description}/>
+                                <BasicCard 
+                                    key={each_data.index} 
+                                    image_index={each_data.index} 
+                                    link_address={each_data.address} 
+                                    title={each_data.title} 
+                                    description={each_data.description}
+                                    carousel_state={each_data.button_index == 1 ? 'active' : ""}
+                                />
                             )
                         })}
                     </PaddingCardWrapper>
