@@ -5,3 +5,7 @@
 .custom-chat-input:focus {
     outline-width: 0;
 }
+
+.chat-input::placeholder {
+    color: #737373;
+}

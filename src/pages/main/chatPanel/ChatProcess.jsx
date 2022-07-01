@@ -1,15 +1,22 @@
-import { current } from "@reduxjs/toolkit";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+
 import ChatBox from "../../../components/chat/chatBox/ChatBox";
 import ChatContainer from "../../../components/chat/chatContainer/ChatContainer";
 import ChatError from "../../../components/chat/chatError/ChatError";
 import ChatLoading from "../../../components/chat/chatLoading/ChatLoading";
 import useScrollToElement from "../../../hooks/scrollToEle/ScrollToElement";
+
 import { useGetIntentRecognitionWithQueryQuery } from "../../../redux/api/intentRecognitionAPI";
 import { useGetSemanticSearchWithQueryQuery } from "../../../redux/api/semanticSearchAPI";
-import { addToHistory, resetAnswer, selectCurrentAnswer, selectHistory, updateIntent, updateSemantic } from "../../../redux/slice/chat/chatSlice";
+import { addToHistory, selectHistory } from "../../../redux/slice/chat/chatSlice";
 import { processIntentData, processSemanticData } from "../../../utils/data-transform";
+
+import sendIcon from '../../../static/images/send_message_icon.png';
+
+const chatInputStyle = {
+    boxShadow: "0 -2px 0  0 rgb(0 0 0 / 0.05)",
+}
 
 const ChatInput = ({submitQuery, addUserChat, scrollToView}) => {
     const [currentQuery, setCurrentQuery] = useState("");
@@ -21,6 +28,7 @@ const ChatInput = ({submitQuery, addUserChat, scrollToView}) => {
     }
 
     const handleKeyDown = (event) => {
+        //enter key register
         if(event.keyCode == 13){
             handleClick();
         }
@@ -31,19 +39,19 @@ const ChatInput = ({submitQuery, addUserChat, scrollToView}) => {
     }
 
     return (
-        <div className="w-full self-end flex justify-end mt-2">
-            <div className="border border-2 rounded-full px-3 py-1 grow md:max-w-md mr-2">
+        <div style={chatInputStyle} className="w-full self-end flex justify-end mt-2 p-2">
+            <div className="rounded-full px-3 py-1 grow mr-2 bg-slate-100">
                 <input 
                     value={currentQuery} 
                     onChange={handleChange} 
-                    className="w-full p-2 custom-chat-input" 
+                    className="chat-input w-full p-2 custom-chat-input bg-slate-100" 
                     type="text" 
                     placeholder="Type anything to chatbot" 
                     onKeyDown={handleKeyDown}
                 />
             </div>
-            <button onClick={handleClick} className="bg-sky-400 rounded-full px-3">
-                <img className="h-5" alt="Send Icon" src="https://img.icons8.com/ios-glyphs/60/ffffff/paper-plane.png"/>
+            <button onClick={handleClick} className="rounded-full px-3">
+                <img className="h-5" alt="Send Icon" src={sendIcon}/>
             </button>
         </div>
     )
