@@ -4,6 +4,7 @@ import './App.css';
 import CustomizePage from './pages/customize/CustomizePage';
 import MainPage from './pages/main/MainPage';
 import { store } from './redux/store/store';
+import 'tw-elements';
 
 function App() {
   return (
