@@ -3,7 +3,7 @@ import BasicTitle from "../../components/typo/basicTitle/BasicTitle";
 import PaddingCardWrapper from "../../components/wrapper/paddingCardWrapper/PaddingCardWrapper";
 import BasicCarousel from "../../components/carousel/basicCarousel/BasicCarousel";
 import data from '../../static/data/CardData.json';
-import 'tw-elements';
+
 const PopularContent = () => {
     return (
         <div className="p-1 md:mt-4">
@@ -12,7 +12,7 @@ const PopularContent = () => {
                 <div className="flex items-center justify-center w-full h-full py-24 sm:py-8 px-4">              
                     <BasicCarousel carousel_id="Popular_carousel">
                         <PaddingCardWrapper>
-                        {data.CardData.map(each_data => {
+                        {data.CardData.map((each_data, index) => {
                             return(
                                 <BasicCard 
                                     key={each_data.index} 
@@ -20,7 +20,7 @@ const PopularContent = () => {
                                     link_address={each_data.address} 
                                     title={each_data.title} 
                                     description={each_data.description}
-                                    carousel_state={each_data.button_index == 1 ? 'active' : ""}
+                                    carousel_state={index == 0 ? 'active' : ""}
                                 />
                             )
                         })}

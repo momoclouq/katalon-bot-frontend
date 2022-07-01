@@ -9,11 +9,11 @@ const BasicCarousel = ({children, carousel_id}) => {
                    {data.CardData.map((each_data, index) => {
                       return(
                         <button
-                          key={each_data.button_index}
+                          key={each_data.index}
                           type="button"
                           data-bs-target={`#${carousel_id}`}
                           data-bs-slide-to={`${index}`}
-                          { ...(each_data.button_index == 1 && { 
+                          { ...(index == 0 && { 
                             "className": "active",
                             "aria-current": "true" 
                           })}
