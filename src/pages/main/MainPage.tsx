@@ -2,7 +2,7 @@ import ChatPanel from "./chatPanel/ChatPanel";
 
 const MainPage = () => {
     return (
-        <div className="w-full mx-auto">
+        <div className="h-screen">
             <ChatPanel />
         </div>
     )

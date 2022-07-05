@@ -6,7 +6,7 @@ import 'tw-elements';
 function App() {
   return (
     <BrowserRouter>
-      <div>
+      <div className="max-h-screen">
         <Routes>
           <Route path="/katalon-bot-frontend" element={<MainPage />} />
         </Routes>

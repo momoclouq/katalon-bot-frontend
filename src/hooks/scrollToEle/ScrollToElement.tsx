@@ -4,7 +4,7 @@ const useScrollToElement = () => {
     const ref = useRef(null);
 
     const scrollToView = () => {
-        ref.current.scrollIntoView({ behavior: "smooth" });
+        ref.current.scrollIntoView();
     }
 
     return {

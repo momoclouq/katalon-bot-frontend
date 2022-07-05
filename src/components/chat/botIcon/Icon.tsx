@@ -1,6 +1,6 @@
 const Icon = ({url}) => {
     return (
-        <div className="h-10 md:h-16 self-start">
+        <div className="h-8 md:h-10">
             <img className="h-full" src={url} alt="icon" />
         </div>
     )

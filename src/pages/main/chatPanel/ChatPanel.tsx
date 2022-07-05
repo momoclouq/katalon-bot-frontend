@@ -1,12 +1,12 @@
-import BasicTitle from "../../../components/typo/basicTitle/BasicTitle";
+import ChatHeader from "../../../components/chat/chatHeader/ChatHeader";
 import ChatProcess from "./ChatProcess";
 
 const ChatPanel = () => {
     return (
-        <div>
-            <BasicTitle text="Have a chat" />
+        <div className="h-full flex flex-col">
+          <ChatHeader />
 
-            <ChatProcess />
+          <ChatProcess />
         </div>
     )
 }

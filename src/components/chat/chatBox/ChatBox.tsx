@@ -31,20 +31,28 @@ const ChatBox = memo(({ isBot, sentence, recommendations }: ChatResponse) => {
 
   if (isBot)
     return (
-      <div className="w-fit p-1 self-start">
-        <div className="grow flex">
-          <Icon url={bot_icon} />
+      <div className="w-4/5 p-1 self-start mb-2">
+        <div className="grow flex flex-col">
+          <div className="flex items-center mb-2">
+            <Icon url={bot_icon} />
+            <div className="ml-2 text-stone-500 font-normal">Katalon</div>
+          </div>
           <ChatText case="bot">{displayChat}</ChatText> 
         </div>
 
-        <div className="flex flex-wrap p-3">{processedChatCards()}</div>
+        <div className="flex flex-wrap">{processedChatCards()}</div>
       </div>
     );
 
   return (
-    <div className="w-fit p-1 self-end flex">
-      <ChatText case="user">{sentence}</ChatText>
-      <Icon url={user_icon} />
+    <div className="w-4/5 p-1 self-end flex flex-col items-end mb-2">
+      <div className="flex flex-col items-end">
+        <div className="flex items-center mb-2">
+          <div className="mr-2 text-stone-500 font-normal">You</div>
+          <Icon url={user_icon} />
+        </div>
+        <ChatText case="user">{sentence}</ChatText>
+      </div>
     </div>
   );
 });

@@ -6,13 +6,14 @@ import {
 } from "react";
 
 import ChatBox from "../../../components/chat/chatBox/ChatBox";
-import ChatContainer from "../../../components/chat/chatContainer/ChatContainer";
+import ChatBoxContainer from "../../../components/chat/chatContainer/ChatBoxContainer";
 import ChatError from "../../../components/chat/chatError/ChatError";
 import ChatLoading from "../../../components/chat/chatLoading/ChatLoading";
 
 import useChatbotQuery, {
   ChatbotQueryState,
 } from "../../../hooks/chatbotHook/useChatbotQuery";
+import useScrollToElement from "../../../hooks/scrollToEle/ScrollToElement";
 
 import sendIcon from "../../../static/images/send_message_icon.png";
 import { ChatResponse } from "../../../typings/ChatBot";
@@ -44,7 +45,7 @@ const ChatInput = ({ submitQuery, addUserChat }: any) => {
   return (
     <div
       style={chatInputStyle}
-      className="w-full self-end flex justify-end mt-2 p-2"
+      className="w-full self-end flex justify-end p-2"
     >
       <div className="rounded-full px-3 py-1 grow mr-2 bg-slate-100">
         <input
@@ -63,7 +64,11 @@ const ChatInput = ({ submitQuery, addUserChat }: any) => {
   );
 };
 
-const ChatDisplay = ({ chatHistory }: { chatHistory: ChatResponse[] }) => {
+const ChatDisplay = ({ chatHistory, scrollToView }: { chatHistory: ChatResponse[]; scrollToView: any; }) => {
+  useEffect(() => {
+    scrollToView();
+  }, [chatHistory, scrollToView]);
+
   return (
     <>
     { chatHistory.map((chat, index) => {
@@ -87,6 +92,8 @@ const ChatProcess = () => {
 
   const { isLoading, hasError, isSuccess, error, result }: ChatbotQueryState =
     useChatbotQuery({ query });
+
+  const { createAnchorHere, scrollToView } = useScrollToElement()
 
   useEffect(() => {
     if (isSuccess && result) {
@@ -112,20 +119,23 @@ const ChatProcess = () => {
   };
 
   return (
-    <ChatContainer>
-      <ChatBox
-        isBot={true}
-        sentence="Hi, I'm Katalon Chatbot. You can ask me anything about Katalon Documentation"
-        recommendations={undefined}
-      />
-      <ChatDisplay chatHistory={chatHistory} />
-      {isLoading ? <ChatLoading /> : ""}
-      {hasError ? <ChatError error={error} /> : ""}
+    <>
+      <ChatBoxContainer>
+        <ChatBox
+          isBot={true}
+          sentence="Hi, I'm Katalon Chatbot. You can ask me anything about Katalon Documentation"
+          recommendations={undefined}
+        />
+        <ChatDisplay chatHistory={chatHistory} scrollToView={scrollToView} />
+        {isLoading ? <ChatLoading /> : ""}
+        {hasError ? <ChatError error={error} /> : ""}
+        {createAnchorHere()}
+      </ChatBoxContainer>
       <ChatInput
         submitQuery={setQuery}
         addUserChat={addUserChatToHistory}
       />
-    </ChatContainer>
+    </>
   );
 };
 

@@ -4,7 +4,7 @@ import Icon from "../botIcon/Icon";
 
 const ChatLoading = () => {
     return (
-        <div className="animate-pulse w-fit p-1 self-start flex">
+        <div className="animate-pulse w-fit p-1 flex flex-col">
             <Icon url={bot_icon} />
             <ChatText case="loading">. . .</ChatText>
         </div>
