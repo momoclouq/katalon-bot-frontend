@@ -9,12 +9,3 @@ export type IntentRecognitionResponse = {
   mainMessage: string,
   carouselCards: CarouselCard[];
 }
-
-export type IntentRecognitionData = {
-  isBot: boolean;
-  sentence: string;
-  recommendations: {
-    title: string;
-    url: string;
-  }[];
-}

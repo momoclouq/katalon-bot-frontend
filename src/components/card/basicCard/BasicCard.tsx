@@ -23,7 +23,7 @@ function useHover() {
   return [ref, value];
 }
 
-const BasicCard = ({image_index, title, link_address ,description, carousel_state}) => {
+const BasicCard = ({image_index, title, link_address ,description, carousel_state}: any) => {
   const [ref, isHovered] = useHover();
 
   return (

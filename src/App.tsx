@@ -6,7 +6,7 @@ import 'tw-elements';
 function App() {
   return (
     <BrowserRouter>
-      <div className="container mx-auto">
+      <div>
         <Routes>
           <Route path="/katalon-bot-frontend" element={<MainPage />} />
         </Routes>

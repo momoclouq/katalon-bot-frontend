@@ -1,12 +1,13 @@
-import { IntentRecognitionData, IntentRecognitionResponse } from "../typings/IntentRecognition.dto";
-import { SemanticSearchData, SemanticSearchResponse } from "../typings/SemanticSearch.dto";
+import { ChatResponse } from "../typings/ChatBot";
+import { IntentRecognitionResponse } from "../typings/IntentRecognition";
+import { SemanticSearchResponse } from "../typings/SemanticSearch";
 
 export const processIntentData = ({ 
   classified, 
-  id, 
-  mainMessage, 
-  carouselCards 
-}: IntentRecognitionResponse): IntentRecognitionData => {
+  id,
+  mainMessage,
+  carouselCards
+}: IntentRecognitionResponse): ChatResponse => {
   if (id === "fallback" || !classified)
     return {
       isBot: true,
@@ -26,7 +27,7 @@ export const processIntentData = ({
   };
 };
 
-export const processSemanticData = (documents: SemanticSearchResponse): SemanticSearchData => {
+export const processSemanticData = (documents: SemanticSearchResponse): ChatResponse => {
   if (Array.isArray(documents) && documents.length > 0) {
     return {
       isBot: true,
