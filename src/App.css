@@ -1,5 +1,11 @@
 * {
-    box-sizing: border-box;
+  box-sizing: border-box;
+  -ms-overflow-style: none;  /* Internet Explorer 10+ */
+  scrollbar-width: none;  /* Firefox */
+}
+
+*::-webkit-scrollbar {
+  display: none;
 }
 
 .custom-chat-input:focus {

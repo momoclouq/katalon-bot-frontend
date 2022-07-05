@@ -31,8 +31,8 @@ const ChatBox = memo(({ isBot, sentence, recommendations }: ChatResponse) => {
 
   if (isBot)
     return (
-      <div className="w-4/5 p-1 self-start mb-2">
-        <div className="grow flex flex-col">
+      <div className="w-full p-1 self-start mb-2">
+        <div className="w-4/5 flex flex-col">
           <div className="flex items-center mb-2">
             <Icon url={bot_icon} />
             <div className="ml-2 text-stone-500 font-normal">Katalon</div>
@@ -40,7 +40,7 @@ const ChatBox = memo(({ isBot, sentence, recommendations }: ChatResponse) => {
           <ChatText case="bot">{displayChat}</ChatText> 
         </div>
 
-        <div className="flex flex-wrap">{processedChatCards()}</div>
+        <div className="w-full flex overflow-x-scroll">{processedChatCards()}</div>
       </div>
     );
 
