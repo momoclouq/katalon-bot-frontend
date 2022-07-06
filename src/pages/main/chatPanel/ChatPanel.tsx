@@ -1,10 +1,10 @@
 import ChatHeader from "../../../components/chat/chatHeader/ChatHeader";
 import ChatProcess from "./ChatProcess";
 
-const ChatPanel = () => {
+const ChatPanel = ({ toogleChatbot }) => {
     return (
         <div className="h-full flex flex-col">
-          <ChatHeader />
+          <ChatHeader toogleChatbot={toogleChatbot} />
 
           <ChatProcess />
         </div>

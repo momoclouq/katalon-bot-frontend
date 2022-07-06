@@ -2,7 +2,7 @@ import Icon from "../botIcon/Icon";
 import bot_icon from "../../../static/images/bot_icon.png";
 import close_icon from "../../../static/images/close_icon.png";
 
-const ChatHeader = () => {
+const ChatHeader = ({ toogleChatbot }) => {
   return (
     <div className="bg-white py-2 px-4 flex justify-between items-center">
       <div className="flex">
@@ -12,7 +12,7 @@ const ChatHeader = () => {
           <div>Support bot</div>
         </div>
       </div>
-      <Icon url={close_icon} />
+      <Icon onClickFn={toogleChatbot} url={close_icon} />
     </div>
   )
 };
