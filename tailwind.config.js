@@ -6,8 +6,11 @@ module.exports = {
     extend: {
       blur: {
         xs: '3px',
+      },
+      maxHeight: {
+        '128': '44rem',
       }
-    },
+    }
   },
   plugins: [
     require('tw-elements/dist/plugin')
