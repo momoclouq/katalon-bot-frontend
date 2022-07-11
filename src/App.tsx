@@ -4,12 +4,6 @@ import { useState } from 'react';
 import MainPage from './pages/main/MainPage';
 import ChatbotBubble from './pages/chatbotBubble/ChatbotBubblePage';
 
-const positionStyle = {
-  position: "fixed",
-  bottom: "1em",
-  right: "1em"
-}
-
 function App() {
   const [showChatbot, setShowChatbot] = useState(false);
 
