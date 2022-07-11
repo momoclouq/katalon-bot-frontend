@@ -5,7 +5,23 @@
 }
 
 *::-webkit-scrollbar {
-  display: none;
+  width: 20px;
+  height: 17px;
+}
+
+*::-webkit-scrollbar-track {
+  border-radius: 100vh;
+  background: #f7f4ed;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: #909497;
+  border-radius: 100vh;
+  border: 3px solid #f6f7ed;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: #BDC3C7;
 }
 
 .custom-chat-input:focus {

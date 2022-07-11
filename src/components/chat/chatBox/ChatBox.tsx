@@ -40,7 +40,7 @@ const ChatBox = memo(({ isBot, sentence, recommendations }: ChatResponse) => {
           <ChatText case="bot">{displayChat}</ChatText> 
         </div>
 
-        <div className="w-full flex overflow-x-scroll">{processedChatCards()}</div>
+        <div className="w-full flex overflow-auto">{processedChatCards()}</div>
       </div>
     );
 
