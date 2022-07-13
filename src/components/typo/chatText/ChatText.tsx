@@ -7,7 +7,7 @@ const ChatText = (props) => {
     if (props.case === "error") extra += "bg-red-800 text-white";
 
     return (
-        <div className={`drop-shadow-md max-w-xs md:max-w-lg font-normal text-base md:text-xl mb-2 mt-2 py-3 px-4 rounded-lg self-start ${extra}`}>
+        <div className={`drop-shadow-md max-w-xs md:max-w-lg font-normal text-sm mb-2 mt-2 py-3 px-4 rounded-lg self-start ${extra}`}>
             {props.children}
         </div>
     )

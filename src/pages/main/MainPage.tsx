@@ -15,8 +15,8 @@ const relativePositionStyle = {
 
 const MainPage = ({ shouldDisplay, toogleChatbot }: any) => {
     return (
-      <div style={fixedPositionStyle(shouldDisplay) as any} className="h-5/6 w-5/6 max-h-128 max-w-lg	">
-        <div style={relativePositionStyle as any} className="h-full w-full text-sm lg:text-md">
+      <div style={fixedPositionStyle(shouldDisplay) as any} className="h-5/6 w-5/6 max-h-128 max-w-lg">
+        <div style={relativePositionStyle as any} className="h-full w-full text-sm lg:text-md border-2 rounded">
           <ChatPanel toogleChatbot={toogleChatbot} />
         </div>
       </div>

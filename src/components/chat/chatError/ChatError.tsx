@@ -4,10 +4,15 @@ import bot_icon from "../../../static/images/bot_icon.png";
 
 const ChatError = ({ error }: { error: any }) => {
     return(
-        <div className="w-fit p-1 self-start flex">
+      <div className="w-full p-1 self-start mb-2">
+        <div className="w-4/5 flex flex-col">
+          <div className="flex items-center mb-2">
             <Icon url={bot_icon} />
-            <ChatText case="error">I could not process your input: {error}</ChatText>
+            <div className="ml-2 text-stone-500 font-normal">Katalon</div>
+          </div>
+          <ChatText case="error">Sorry, {error}</ChatText> 
         </div>
+      </div>
     )
 }
 

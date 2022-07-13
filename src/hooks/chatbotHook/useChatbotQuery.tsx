@@ -78,8 +78,9 @@ const useChatbotQuery = ({query}: { query: string }): ChatbotQueryState => {
         successState(response.data as QueryResponse);
       } catch (err: unknown) {
         if (axios.isAxiosError(err))  {
-          const message = (err.response as any).data.error || 'unknown error';
-          errorState(message);
+          console.log("Raw error: ", err);
+          const message = (err.response as any)?.data?.error || 'unknown error';
+          errorState({ error: message });
         } else {
           errorState({
             error: (err as Error).message

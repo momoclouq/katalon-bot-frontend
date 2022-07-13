@@ -12,7 +12,8 @@ const ChatHeader = ({ toogleChatbot }) => {
           <div>Support bot</div>
         </div>
       </div>
-      <Icon onClickFn={toogleChatbot} url={close_icon} />
+
+      <Icon size="h-5" onClickFn={toogleChatbot} url={close_icon} />
     </div>
   )
 };
