@@ -1,4 +1,7 @@
-import bot_icon from "../../static/images/bot_icon.png";
+// import bot_icon from "../../static/images/bot_icon.png";
+import { imageMap } from "../../static/image_links/image-map";
+
+const { bot_icon } = imageMap;
 
 const positionStyle = (shouldDisplay) => ({
   position: "fixed",

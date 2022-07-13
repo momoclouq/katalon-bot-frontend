@@ -15,8 +15,11 @@ import useChatbotQuery, {
 } from "../../../hooks/chatbotHook/useChatbotQuery";
 import useScrollToElement from "../../../hooks/scrollToEle/ScrollToElement";
 
-import sendIcon from "../../../static/images/send_message_icon.png";
+// import sendIcon from "../../../static/images/send_message_icon.png";
+import { imageMap } from "../../../static/image_links/image-map";
 import { ChatResponse } from "../../../typings/ChatBot";
+
+const { sendIcon } = imageMap;
 
 const chatInputStyle = {
   boxShadow: "0 -2px 0  0 rgb(0 0 0 / 0.05)",

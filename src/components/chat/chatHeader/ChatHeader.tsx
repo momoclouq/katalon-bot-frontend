@@ -1,6 +1,9 @@
 import Icon from "../botIcon/Icon";
-import bot_icon from "../../../static/images/bot_icon.png";
-import close_icon from "../../../static/images/close_icon.png";
+// import bot_icon from "../../../static/images/bot_icon.png";
+// import close_icon from "../../../static/images/close_icon.png";
+import { imageMap } from "../../../static/image_links/image-map";
+
+const { bot_icon, close_icon } = imageMap;
 
 const ChatHeader = ({ toogleChatbot }) => {
   return (

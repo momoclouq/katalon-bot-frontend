@@ -1,6 +1,9 @@
-import katalon_icon from "../../../static/images/katalon_icon.png";
+// import katalon_icon from "../../../static/images/katalon_icon.png";
+import { imageMap } from "../../../static/image_links/image-map";
 import { Recommendation } from "../../../typings/ChatBot";
 import Icon from "../botIcon/Icon";
+
+const { katalon_icon } = imageMap;
 
 const ChatCard = ({title, subtitle, url}: Recommendation) => {
     return (

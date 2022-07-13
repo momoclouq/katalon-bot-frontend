@@ -1,6 +1,9 @@
 import ChatText from "../../typo/chatText/ChatText";
 import Icon from "../botIcon/Icon";
-import bot_icon from "../../../static/images/bot_icon.png";
+import { imageMap } from "../../../static/image_links/image-map";
+// import bot_icon from "../../../static/images/bot_icon.png";
+
+const { bot_icon } = imageMap;
 
 const ChatError = ({ error }: { error: any }) => {
     return(

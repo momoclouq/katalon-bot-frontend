@@ -1,11 +1,14 @@
 import ChatText from "../../typo/chatText/ChatText";
-import bot_icon from "../../../static/images/bot_icon.png";
-import user_icon from "../../../static/images/user_icon.png";
+// import bot_icon from "../../../static/images/bot_icon.png";
+// import user_icon from "../../../static/images/user_icon.png";
+import { imageMap } from "../../../static/image_links/image-map";
 import Icon from "../botIcon/Icon";
 import ChatCard from "./ChatCard";
 import PaddingChatCardWrapper from "../../wrapper/paddingChatCardWrapper/PaddingChatCardWrapper";
 import { ChatResponse } from "../../../typings/ChatBot";
 import { memo } from "react";
+
+const { bot_icon, user_icon } = imageMap;
 
 const ChatBox = memo(({ isBot, sentence, recommendations }: ChatResponse) => {
   const displayChat = sentence || 'More similar results';
