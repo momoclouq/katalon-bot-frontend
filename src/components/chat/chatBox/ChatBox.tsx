@@ -6,8 +6,40 @@ import ChatCard from "./ChatCard";
 import PaddingChatCardWrapper from "../../wrapper/paddingChatCardWrapper/PaddingChatCardWrapper";
 import { ChatResponse } from "../../../typings/ChatBot";
 import { memo } from "react";
+import React, {  useRef, useEffect, useState, RefObject } from 'react';
+
+function useHover() {
+  const [value, setValue] = useState(false);
+  const ref = useRef<HTMLDivElement>(null) || null;
+  let anchor;
+  const resetScrolling = () => 
+    { 
+      setValue(false);
+      clearTimeout(anchor);
+      anchor = setTimeout(() => {setValue(true) }, 1000);
+    }
+  const displayScroll = () =>{
+      setValue(false);
+    }
+  useEffect(
+    () => {
+      const node = ref.current;
+      if (node != null) {
+        node.addEventListener("scroll", resetScrolling);
+        node.addEventListener("click", displayScroll);
+        return () => {
+        node.removeEventListener("scroll", resetScrolling);
+        node.addEventListener("click", displayScroll);
+        };
+      }
+    },
+    [ref.current] // Recall only if ref changes
+  );
+  return [ref, value];
+}
 
 const ChatBox = memo(({ isBot, sentence, recommendations }: ChatResponse) => {
+  const [ref, isHovered] = useHover();
   const displayChat = sentence || 'More similar results';
 
   const processedChatCards = () => {
@@ -40,7 +72,7 @@ const ChatBox = memo(({ isBot, sentence, recommendations }: ChatResponse) => {
           <ChatText case="bot">{displayChat}</ChatText> 
         </div>
 
-        <div className="w-full flex overflow-auto">{processedChatCards()}</div>
+        <div ref={ref as RefObject<HTMLDivElement>} className={`${isHovered ? `customized-scrollbar-hide`:`customized-scrollbar`} w-full flex overflow-auto`}>{processedChatCards()}</div>
       </div>
     );
 
