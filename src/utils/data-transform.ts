@@ -2,12 +2,15 @@ import { ChatResponse } from "../typings/ChatBot";
 import { IntentRecognitionResponse } from "../typings/IntentRecognition";
 import { SemanticSearchResponse } from "../typings/SemanticSearch";
 
-export const processIntentData = ({ 
-  classified, 
-  id,
-  mainMessage,
-  carouselCards
-}: IntentRecognitionResponse): ChatResponse => {
+export const processIntentData = (data: IntentRecognitionResponse): ChatResponse => {
+  if (data === null) return {
+    isBot: true,
+    sentence: 'Looks like we have a difficult question!',
+    recommendations: []
+  }
+
+  const { classified, id, mainMessage, carouselCards } = data;
+  
   if (id === "fallback" || !classified)
     return {
       isBot: true,
