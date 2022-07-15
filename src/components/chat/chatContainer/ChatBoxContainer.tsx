@@ -3,18 +3,20 @@ import React, {  useRef, useEffect, useState, RefObject } from 'react';
 function useHover() {
   const [value, setValue] = useState(false);
   const ref = useRef<HTMLDivElement>(null) || null;
-  const handleScrolling = () => setValue(true);
-  const handleScrollingStop = () => setValue(false);
+  let anchor;
+  const resetScrolling = () => 
+    { 
+      setValue(false);
+      clearTimeout(anchor);
+      anchor = setTimeout(() => {setValue(true) }, 1000);
+    }
   useEffect(
     () => {
-      console.log(ref)
       const node = ref.current;
       if (node != null) {
-        node.addEventListener("mouseover", handleScrolling);
-        node.addEventListener("mouseout", handleScrollingStop);
+        node.addEventListener("scroll", resetScrolling);
         return () => {
-          node.addEventListener("mouseover", handleScrolling);
-          node.removeEventListener("mouseout", handleScrollingStop);
+        node.removeEventListener("scroll", resetScrolling);
         };
       }
     },
@@ -25,7 +27,7 @@ function useHover() {
 const ChatBoxContainer = ({ children }) => {
   const [ref, isHovered] = useHover();
   return (
-    <div ref={ref as RefObject<HTMLDivElement>} className={`${isHovered ? "customized-scrollbar" : "customized-scrollbar-hide"} grow overflow-auto flex flex-col bg-blue-100 p-2`}>
+    <div ref={ref as RefObject<HTMLDivElement>} className={`${isHovered ? `customized-scrollbar-hide`:`customized-scrollbar`} grow overflow-auto flex flex-col bg-blue-100 p-2`}>
       {children}
     </div>
   )
