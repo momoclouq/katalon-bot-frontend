@@ -1,10 +1,10 @@
 import React from 'react';
-
+import { ChatBoxContainerDiv } from '../../../Styling';
 const ChatBoxContainer = ({ children }) => {
   return (
-    <div className=" grow overflow-auto flex flex-col bg-blue-100 p-2">
+    <ChatBoxContainerDiv padding="0.5rem" overflow="auto" display="flex" flex_direction="column" background_color="rgb(219 234 254)" grow="1" >
       {children}
-    </div>
+    </ChatBoxContainerDiv>
   )
 };
 

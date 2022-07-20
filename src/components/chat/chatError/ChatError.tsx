@@ -1,18 +1,18 @@
 import ChatText from "../../typo/chatText/ChatText";
 import Icon from "../botIcon/Icon";
 import bot_icon from "../../../static/images/bot_icon.png";
-
+import { ChatErrorDiv } from "../../../Styling";
 const ChatError = ({ error }: { error: any }) => {
     return(
-      <div className="w-full p-1 self-start mb-2">
-        <div className="w-4/5 flex flex-col">
-          <div className="flex items-center mb-2">
+      <ChatErrorDiv width="100%" padding="0.25rem" align_self="self-start" margin_bottom="0.5rem">
+        <ChatErrorDiv width="80%" display="flex" flex_direction="column" >
+          <ChatErrorDiv display="flex" flex_direction="column" margin_bottom="0.5rem" >
             <Icon url={bot_icon} />
-            <div className="ml-2 text-stone-500 font-normal">Katalon</div>
-          </div>
+            <ChatErrorDiv margin_left="0.5rem" color="rgb(120 113 108)" font_weight="400">Katalon</ChatErrorDiv>
+          </ChatErrorDiv>
           <ChatText case="error">Sorry, {error}</ChatText> 
-        </div>
-      </div>
+        </ChatErrorDiv>
+      </ChatErrorDiv>
     )
 }
 

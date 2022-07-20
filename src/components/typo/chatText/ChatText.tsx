@@ -1,15 +1,9 @@
+import { ChatTextDiv } from "../../../Styling";
 const ChatText = (props) => {
-    let extra = "";
-
-    if (props.case === "user") extra += "bg-sky-500 text-white"; 
-    if (props.case === "bot") extra += "bg-slate-100 text-slate-600";
-    if (props.case === "loading") extra += "bg-slate-100 text-xl";
-    if (props.case === "error") extra += "bg-red-800 text-white";
-
     return (
-        <div className={`drop-shadow-md max-w-xs md:max-w-lg font-normal text-sm mb-2 mt-2 py-3 px-4 rounded-lg self-start ${extra}`}>
+        <ChatTextDiv shadow_drop="drop-shadow(0 4px 3px rgb(0 0 0 / 0.07)) drop-shadow(0 2px 2px rgb(0 0 0 / 0.06))" max_width="20rem" lg_max_width="32rem" font_weight="400" font_size="0.875rem" line-height="1.25rem" margin_bottom="0.5rem" margin_top="0.5rem" padding="0.75rem 1rem 0.75rem 1rem" border_radius="0.5rem"  align_self="flex-start" p_case={props.case}>
             {props.children}
-        </div>
+        </ChatTextDiv>
     )
 }
 
