@@ -12,14 +12,17 @@ function useScroll() {
   const [value, setValue] = useState(true);
   const ref = useRef<HTMLDivElement>(null) || null;
   let anchor;
+  let anchor_loose;
   const resetScrolling = () => 
     { 
       setValue(false);
       clearTimeout(anchor);
-      anchor = setTimeout(() => {setValue(true) }, 1000);
+      anchor = setTimeout(() => {setValue(true) }, 5000);
     }
   const displayScroll = () =>{
       setValue(false);
+      clearTimeout(anchor_loose);
+      anchor_loose = setTimeout(() => {setValue(true) }, 10000);
     }
   useEffect(
     () => {

@@ -136,7 +136,7 @@ const ChatBoxContainerDiv = styled.div`
     background-color:${props => props.background_color};
     padding: ${props => props.padding};
     flex-grow: ${props => props.grow};
-
+    height: ${props => props.height};
 `;
 
 const ChatContainerDiv = styled.div`

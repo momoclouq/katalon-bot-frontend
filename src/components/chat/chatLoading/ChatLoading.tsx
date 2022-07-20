@@ -4,7 +4,7 @@ import Icon from "../botIcon/Icon";
 import { ChatDivLoading } from "../../../Styling";
 const ChatLoading = () => {
     return (
-        <ChatDivLoading width="fit-content" padding="4px" flex_direction="column" display="display">
+        <ChatDivLoading width="fit-content" padding="4px" flex_direction="column" display="flex">
             <Icon url={bot_icon} />
             <ChatText case="loading">. . .</ChatText>
         </ChatDivLoading>
