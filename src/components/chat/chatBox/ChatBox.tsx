@@ -51,7 +51,8 @@ const ChatBox = memo(({ isBot, sentence, recommendations }: ChatResponse) => {
       return (
         <PaddingChatCardWrapper
           key={"chat wrapper: " + index}
-          value="p-1 lg:p-2"
+          value_1={"0.25rem"}
+          value_2={"0.5rem"}
         >
           <ChatCard
             title={recommendation.title}

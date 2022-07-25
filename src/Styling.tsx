@@ -34,17 +34,23 @@ const ChatHeaderDiv= styled.div`
 `;
 
 const ChatDivIcon= styled.div`
-    height: ${props => props.height || "2rem"};
-    @media (min-width: 768px) { 
+    height: ${props => props.height || `2rem`};
+    @media (min-width: 1024px) {
         height: 2.5rem;
-     }
+    }
+    @media (max-width: 1024px) {
+        height: 2rem;
+    }
 `;
 
 const ChatIconImg= styled.img`
     height: ${props => props.height};
-    @media (min-width: 768px) { 
+    @media (min-width: 1024px) {
         height: 2.5rem;
-     }
+    }
+    @media (max-width: 1024px) {
+        height: 2rem;
+    }
     src: ${props => props.src};
     alt: ${props => props.alt};
 `;
@@ -89,7 +95,7 @@ const ChatCardHeader= styled.div`
 const ChatCardBody= styled.div`
     background-color: ${props => props.background_color};
     width: ${props => props.width};
-    @media (min-width: 1024px) {
+    @media (max-width: 600px ) {
         padding-left: ${props => props.lg_padding_left};
         padding-right: ${props => props.lg_padding_right};
     }
@@ -111,6 +117,10 @@ const ChatCardContent= styled.div`
     overflow-wrap: ${props => props.break_word};
     padding: ${props => props.padding} ;
     color: ${props => props.color};
+    @media (max-width: 1024px) {
+        font-size: 0.875rem; /* 14px */
+        line-height: 1.25rem; /* 20px */
+    }
 `;
 
 const ChatBoxDiv = styled.div`
@@ -136,7 +146,13 @@ const ChatBoxContainerDiv = styled.div`
     background-color:${props => props.background_color};
     padding: ${props => props.padding};
     flex-grow: ${props => props.grow};
-    height: ${props => props.height};
+    height: ${props => props.height} ;
+    @media (min-width: 1024px) {
+        height: 80%;
+    }
+    @media (max-width: 1024px) {
+        height: 83%;
+    }
 `;
 
 const ChatContainerDiv = styled.div`
@@ -160,6 +176,7 @@ const ChatErrorDiv = styled.div`
     color: ${props => props.color};
     margin-left: ${props => props.margin_left};
     margin-right: ${props => props.margin_right};
+    margin-top: ${props => props.margin_top};
     overflow: ${props => props.overflow};
     margin-bottom: ${props => props.margin_bottom};
 `;
@@ -183,8 +200,8 @@ const ChatTextDiv = styled.div`
     background-color:${props =>  props.p_case === 'bot' ? 'rgb(241 245 249)' : ''};
     color: ${props =>  props.p_case === 'bot' ? 'rgb(71 85 105)' : ''};
     background-color:${props =>  props.p_case === 'loading' ? 'rgb(241 245 249)' : ''};
-    font-size: ${props =>  props.p_case === 'loading' ? '1.25rem' : ''} !important;  
-    line-height: ${props =>  props.p_case === 'loading' ? '1.75rem' : ''} !important;      
+    font-size: ${props =>  props.p_case === 'loading' ? '1.25rem' : ''} ;  
+    line-height: ${props =>  props.p_case === 'loading' ? '1.75rem' : ''} ;      
     background-color:${props =>  props.p_case === 'error' ? 'rgb(153 27 27)' : ''};
     color: ${props =>  props.p_case === 'error' ? 'rgb(255 255 255) ' : ''};
 `;
@@ -232,4 +249,11 @@ const ChatProcessInput = styled.input`
     padding-right:${props => props.padding_right};
     border-radius: ${props => props.border_radius};
 `;
-export {ChatProcessButton, ChatProcessInput, ChatProcessDiv,ChatProcessImg, ChatBotBubbleImg,ChatBotBubbleDiv,ChatDiv,ChatPanelDiv,ChatHeaderDiv,ChatDivIcon,ChatIconImg,ChatDivLoading,ChatCardDiv,ChatCardHeader,ChatCardBody,ChatCardContent,ChatBoxDiv,ChatBoxContainerDiv,ChatContainerDiv,ChatErrorDiv,ChatTextDiv };
+
+const PaddingChatCardWrapperDiv = styled.div`
+    padding: ${props => props.padding};
+    @media screen and (min-width: 1024px) {
+        padding: ${props => props.lg_padding};
+    }
+`;
+export {PaddingChatCardWrapperDiv,ChatProcessButton, ChatProcessInput, ChatProcessDiv,ChatProcessImg, ChatBotBubbleImg,ChatBotBubbleDiv,ChatDiv,ChatPanelDiv,ChatHeaderDiv,ChatDivIcon,ChatIconImg,ChatDivLoading,ChatCardDiv,ChatCardHeader,ChatCardBody,ChatCardContent,ChatBoxDiv,ChatBoxContainerDiv,ChatContainerDiv,ChatErrorDiv,ChatTextDiv };
