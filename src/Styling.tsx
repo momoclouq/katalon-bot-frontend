@@ -117,7 +117,7 @@ const ChatCardContent= styled.div`
     overflow-wrap: ${props => props.break_word};
     padding: ${props => props.padding} ;
     color: ${props => props.color};
-    @media (max-width: 1024px) {
+    @media (min-width: 1024px) {
         font-size: 0.875rem; /* 14px */
         line-height: 1.25rem; /* 20px */
     }
