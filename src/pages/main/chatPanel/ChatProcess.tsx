@@ -17,7 +17,7 @@ import useScrollToElement from "../../../hooks/scrollToEle/ScrollToElement";
 
 import sendIcon from "../../../static/images/send_message_icon.png";
 import { ChatResponse } from "../../../typings/ChatBot";
-
+import { ChatProcessDiv,ChatProcessImg,ChatProcessButton,ChatProcessInput } from "../../../Styling";
 const chatInputStyle = {
   boxShadow: "0 -2px 0  0 rgb(0 0 0 / 0.05)",
 };
@@ -43,24 +43,31 @@ const ChatInput = ({ submitQuery, addUserChat }: any) => {
   };
 
   return (
-    <div
+    <ChatProcessDiv
       style={chatInputStyle}
-      className="w-full self-end flex justify-end p-2"
+      width="100%"
+      align_self="flex-end"
+      display="flex"
+      justify_content="flex-end"
+      padding="0.5rem"
     >
-      <div className="rounded-full px-3 py-1 grow mr-2 bg-slate-100">
-        <input
+      <ChatProcessDiv border_radius="9999px" padding="0.25rem 0.75rem 0.25rem 0.75rem" grow="1" margin_right="0.5rem" background_color="rgb(241 245 249)" >
+        <ChatProcessInput
           value={currentQuery}
           onChange={handleChange}
-          className="chat-input w-full p-2 custom-chat-input bg-slate-100"
+          width="100%"
+          padding="0.5rem"
+          background_color="rgb(241 245 249)"
+          className="chat-input custom-chat-input "
           type="text"
           placeholder="Type anything to chatbot"
           onKeyDown={handleKeyDown}
         />
-      </div>
-      <button onClick={handleClick} className="rounded-full px-3">
-        <img className="h-5" alt="Send Icon" src={sendIcon} />
-      </button>
-    </div>
+      </ChatProcessDiv>
+      <ChatProcessButton onClick={handleClick} border_radius="9999px" margin_right="0.75rem" margin_left="0.75rem">
+        <ChatProcessImg height="1.25rem" alt="Send Icon" src={sendIcon} />
+      </ChatProcessButton>
+    </ChatProcessDiv>
   );
 };
 

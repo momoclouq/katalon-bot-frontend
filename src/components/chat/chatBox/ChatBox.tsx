@@ -6,8 +6,43 @@ import ChatCard from "./ChatCard";
 import PaddingChatCardWrapper from "../../wrapper/paddingChatCardWrapper/PaddingChatCardWrapper";
 import { ChatResponse } from "../../../typings/ChatBot";
 import { memo } from "react";
+import React, {  useRef, useEffect, useState, RefObject } from 'react';
+import { ChatBoxDiv } from "../../../Styling";
+function useScroll() {
+  const [value, setValue] = useState(true);
+  const ref = useRef<HTMLDivElement>(null) || null;
+  let anchor;
+  let anchor_loose;
+  const resetScrolling = () => 
+    { 
+      setValue(false);
+      clearTimeout(anchor);
+      anchor = setTimeout(() => {setValue(true) }, 5000);
+    }
+  const displayScroll = () =>{
+      setValue(false);
+      clearTimeout(anchor_loose);
+      anchor_loose = setTimeout(() => {setValue(true) }, 10000);
+    }
+  useEffect(
+    () => {
+      const node = ref.current;
+      if (node != null) {
+        node.addEventListener("scroll", resetScrolling);
+        node.addEventListener("click", displayScroll);
+        return () => {
+        node.removeEventListener("scroll", resetScrolling);
+        node.addEventListener("click", displayScroll);
+        };
+      }
+    },
+    [ref.current] // Recall only if ref changes
+  );
+  return [ref, value];
+}
 
 const ChatBox = memo(({ isBot, sentence, recommendations }: ChatResponse) => {
+  const [ref, isScrolled] = useScroll();
   const displayChat = sentence || 'More similar results';
 
   const processedChatCards = () => {
@@ -16,7 +51,8 @@ const ChatBox = memo(({ isBot, sentence, recommendations }: ChatResponse) => {
       return (
         <PaddingChatCardWrapper
           key={"chat wrapper: " + index}
-          value="p-1 lg:p-2"
+          value_1={"0.25rem"}
+          value_2={"0.5rem"}
         >
           <ChatCard
             title={recommendation.title}
@@ -31,29 +67,29 @@ const ChatBox = memo(({ isBot, sentence, recommendations }: ChatResponse) => {
 
   if (isBot)
     return (
-      <div className="w-full p-1 self-start mb-2">
-        <div className="w-4/5 flex flex-col">
-          <div className="flex items-center mb-2">
+      <ChatBoxDiv width="100%" padding="0.25rem" align_self="self-start" margin_bottom="0.5rem" >
+        <ChatBoxDiv width="80%" display="flex" flex_direction="column" >
+          <ChatBoxDiv margin_bottom="0.5rem" display="flex" align_items="center" >
             <Icon url={bot_icon} />
-            <div className="ml-2 text-stone-500 font-normal">Katalon</div>
-          </div>
+            <ChatBoxDiv margin_left="0.5rem" color="rgb(120 113 108)" font_weight="400">Katalon</ChatBoxDiv>
+          </ChatBoxDiv>
           <ChatText case="bot">{displayChat}</ChatText> 
-        </div>
+        </ChatBoxDiv>
 
-        <div className="w-full flex overflow-auto">{processedChatCards()}</div>
-      </div>
+        <ChatBoxDiv width="100%" display="flex" overflow="auto" ref={ref as RefObject<HTMLDivElement>} className={`${isScrolled ? `customized-scrollbar-hide`:`customized-scrollbar`}`}>{processedChatCards()}</ChatBoxDiv>
+      </ChatBoxDiv>
     );
 
   return (
-    <div className="w-4/5 p-1 self-end flex flex-col items-end mb-2">
-      <div className="flex flex-col items-end">
-        <div className="flex items-center mb-2">
-          <div className="mr-2 text-stone-500 font-normal">You</div>
+    <ChatBoxDiv display="flex" flex_direction="column" width="80%" padding="0.25rem" align_self="self-end" margin_bottom="0.5rem" align_items="flex-end" >
+      <ChatBoxDiv align_items="flex-end" display="flex" flex_direction="column" >
+        <ChatBoxDiv align_items="center" display="flex" margin_bottom="0.5rem">
+          <ChatBoxDiv margin_right="0.5rem" color="rgb(120 113 108)" font_weight="400" >You</ChatBoxDiv>
           <Icon url={user_icon} />
-        </div>
+        </ChatBoxDiv>
         <ChatText case="user">{sentence}</ChatText>
-      </div>
-    </div>
+      </ChatBoxDiv>
+    </ChatBoxDiv>
   );
 });
 

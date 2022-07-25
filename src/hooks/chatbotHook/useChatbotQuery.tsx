@@ -5,7 +5,7 @@ import { ChatResponse } from "../../typings/ChatBot";
 import { QueryResponse } from "../../typings/RawResponse";
 import { processIntentData, processSemanticData } from "../../utils/data-transform";
 
-const baseURL = process.env.baseUrl || "http://localhost:5000/mockResult";
+const baseURL = process.env.baseUrl || "http://localhost:5000/query";
 
 export type ChatResult = {
   intentRecognitionChat: ChatResponse;
@@ -77,11 +77,13 @@ const useChatbotQuery = ({query}: { query: string }): ChatbotQueryState => {
   
         successState(response.data as QueryResponse);
       } catch (err: unknown) {
+        console.log((err as any).message);
         if (axios.isAxiosError(err))  {
           console.log("Raw error: ", err);
           const message = (err.response as any)?.data?.error || 'unknown error';
           errorState({ error: message });
         } else {
+          console.log(err);
           errorState({
             error: (err as Error).message
           });

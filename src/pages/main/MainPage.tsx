@@ -1,5 +1,5 @@
 import ChatPanel from "./chatPanel/ChatPanel";
-
+import {ChatDiv} from "../../Styling"
 const fixedPositionStyle = (shouldDisplay) => ({
   position: "fixed",
   bottom: "0",
@@ -15,11 +15,11 @@ const relativePositionStyle = {
 
 const MainPage = ({ shouldDisplay, toogleChatbot }: any) => {
     return (
-      <div style={fixedPositionStyle(shouldDisplay) as any} className="h-5/6 w-5/6 max-h-128 max-w-lg">
-        <div style={relativePositionStyle as any} className="h-full w-full text-sm lg:text-md border-2 rounded">
+      <ChatDiv style={fixedPositionStyle(shouldDisplay) as any} height="700px" width="508px" max_height="700px" max_width="700px">
+        <ChatDiv style={relativePositionStyle as any} height="100%" width="100%" sm_font_size="0.875rem" sm_line_height="1.25rem" lg_font_size="1.125rem" lg_line_height="1.75rem" border_radius="0.25rem" border_width="2px">
           <ChatPanel toogleChatbot={toogleChatbot} />
-        </div>
-      </div>
+        </ChatDiv>
+      </ChatDiv>
     )
 }
 

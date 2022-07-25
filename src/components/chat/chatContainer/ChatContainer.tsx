@@ -1,8 +1,9 @@
+import { ChatContainerDiv } from "../../../Styling";
 const ChatContainer = ({children}) => {
     return (
-        <div className="p-1 flex flex-col grow">
+        <ChatContainerDiv  display="flex" flex_direction="column" grow="1" padding="0.25rem">
             {children}
-        </div>
+        </ChatContainerDiv>
     )
 }
 

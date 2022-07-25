@@ -1,8 +1,9 @@
-const PaddingChatCardWrapper = ({children, value}) => {
+import { PaddingChatCardWrapperDiv } from "../../../Styling";
+const PaddingChatCardWrapper = ({children, value_1, value_2}) => {
     return (
-        <div className={`${value}`}>
+        <PaddingChatCardWrapperDiv padding={value_1} lg_padding={value_2}>
             {children}
-        </div>
+        </PaddingChatCardWrapperDiv>
     )
 }
 

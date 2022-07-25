@@ -8,4 +8,4 @@ export type IntentRecognitionResponse = {
   id: string,
   mainMessage: string,
   carouselCards: CarouselCard[];
-}
+} | null;
