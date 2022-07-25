@@ -147,12 +147,26 @@ const ChatBoxContainerDiv = styled.div`
     padding: ${props => props.padding};
     flex-grow: ${props => props.grow};
     height: ${props => props.height} ;
-    @media (min-width: 1024px) {
-        height: 80%;
-    }
-    @media (max-width: 1024px) {
-        height: 83%;
-    }
+
+    @media only screen and (min-width: 375px) 
+        {height: 80%;}
+
+    @media only screen and (max-width: 600px) 
+        {height: 83%;}
+
+    @media only screen and (min-width: 768px) 
+        {height: 83%;}
+
+    @media only screen and (min-width: 992px) 
+        {height: 72%;}
+
+    @media only screen and (min-width: 1037px) 
+        {height: 80%;}
+
+    @media only screen and (min-width: 1200px) 
+        {height: 79%;}
+        
+    
 `;
 
 const ChatContainerDiv = styled.div`
