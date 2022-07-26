@@ -18,9 +18,13 @@ import useScrollToElement from "../../../hooks/scrollToEle/ScrollToElement";
 import sendIcon from "../../../static/images/send_message_icon.png";
 import { ChatResponse } from "../../../typings/ChatBot";
 import { ChatProcessDiv,ChatProcessImg,ChatProcessButton,ChatProcessInput } from "../../../Styling";
-const chatInputStyle = {
+const chatInputWrapperStyle = {
   boxShadow: "0 -2px 0  0 rgb(0 0 0 / 0.05)",
-};
+  width: "100%",
+  display: "flex",
+  alignItems: "center",
+  flexGrow: "grow"
+} as React.CSSProperties;
 
 const ChatInput = ({ submitQuery, addUserChat }: any) => {
   const [currentQuery, setCurrentQuery] = useState("");
@@ -43,31 +47,25 @@ const ChatInput = ({ submitQuery, addUserChat }: any) => {
   };
 
   return (
-    <ChatProcessDiv
-      style={chatInputStyle}
-      width="100%"
-      align_self="flex-end"
-      display="flex"
-      justify_content="flex-end"
-      padding="0.5rem"
-    >
-      <ChatProcessDiv border_radius="9999px" padding="0.25rem 0.75rem 0.25rem 0.75rem" grow="1" margin_right="0.5rem" background_color="rgb(241 245 249)" >
+    <div style={chatInputWrapperStyle}>
+      <ChatProcessDiv border_radius="9999px" margin="0.4rem" padding="0.5rem" grow="1" background_color="rgb(241 245 249)" >
         <ChatProcessInput
           value={currentQuery}
           onChange={handleChange}
-          width="100%"
-          padding="0.5rem"
+          padding_y="0.25rem"
+          padding_x="0.5rem"
           background_color="rgb(241 245 249)"
           className="chat-input custom-chat-input "
           type="text"
+          width="100%"
           placeholder="Type anything to chatbot"
           onKeyDown={handleKeyDown}
         />
       </ChatProcessDiv>
-      <ChatProcessButton onClick={handleClick} border_radius="9999px" margin_right="0.75rem" margin_left="0.75rem">
+      <ChatProcessButton onClick={handleClick} border_radius="9999px" padding_right="1rem" padding_left="1rem">
         <ChatProcessImg height="1.25rem" alt="Send Icon" src={sendIcon} />
       </ChatProcessButton>
-    </ChatProcessDiv>
+    </div>
   );
 };
 

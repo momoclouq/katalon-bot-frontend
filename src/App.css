@@ -42,3 +42,7 @@
 .chat-input::placeholder {
     color: #737373;
 }
+
+*, *:before, *:after {
+  box-sizing: border-box;
+}

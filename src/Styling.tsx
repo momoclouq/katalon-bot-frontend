@@ -18,7 +18,7 @@ const ChatDiv= styled.div`
 const ChatPanelDiv= styled.div`
     height: ${props => props.height};
     flex-direction: ${props => props.flex_direction};
-    display: ${props => props.flex};
+    display: ${props => props.display};
 `;
 
 const ChatHeaderDiv= styled.div`
@@ -146,27 +146,6 @@ const ChatBoxContainerDiv = styled.div`
     background-color:${props => props.background_color};
     padding: ${props => props.padding};
     flex-grow: ${props => props.grow};
-    height: ${props => props.height} ;
-
-    @media only screen and (min-width: 375px) 
-        {height: 80%;}
-
-    @media only screen and (max-width: 600px) 
-        {height: 83%;}
-
-    @media only screen and (min-width: 768px) 
-        {height: 83%;}
-
-    @media only screen and (min-width: 992px) 
-        {height: 72%;}
-
-    @media only screen and (min-width: 1037px) 
-        {height: 80%;}
-
-    @media only screen and (min-width: 1200px) 
-        {height: 79%;}
-        
-    
 `;
 
 const ChatContainerDiv = styled.div`
@@ -235,12 +214,9 @@ const ChatBotBubbleImg = styled.img`
 
 const ChatProcessDiv = styled.div`
     width: ${props => props.width};
-    align-self: ${props => props.align_self};
-    display: ${props => props.display};
-    justify-content: ${props => props.justify_content};
     padding: ${props => props.padding};
     border-radius: ${props => props.border_radius};
-    margin-right: ${props => props.margin_right};
+    margin: ${props => props.margin};
     background-color:${props =>  props.background_color};
     flex-grow: ${props => props.grow};
 `;
@@ -254,14 +230,15 @@ const ChatProcessButton = styled.button`
     height: ${props => props.height};
     src: ${props => props.src};
     alt: ${props => props.alt};
+    padding-right: ${props => props.padding_right};
+    padding-left: ${props => props.padding_left};
 `;
 const ChatProcessInput = styled.input`
     width: ${props => props.width};
-    padding: ${props => props.padding};
+    padding: ${props => props.padding_y} ${props => props.padding_x};
     background-color:${props =>  props.background_color};
-    padding-left: ${props => props.padding_left};
-    padding-right:${props => props.padding_right};
     border-radius: ${props => props.border_radius};
+    width: ${props => props.width}
 `;
 
 const PaddingChatCardWrapperDiv = styled.div`
