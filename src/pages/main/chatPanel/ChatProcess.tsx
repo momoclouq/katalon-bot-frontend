@@ -23,7 +23,7 @@ const chatInputWrapperStyle = {
   width: "100%",
   display: "flex",
   alignItems: "center",
-  flexGrow: "grow"
+  flexGrow: "grow",
 } as React.CSSProperties;
 
 const ChatInput = ({ submitQuery, addUserChat }: any) => {
@@ -55,7 +55,7 @@ const ChatInput = ({ submitQuery, addUserChat }: any) => {
           padding_y="0.25rem"
           padding_x="0.5rem"
           background_color="rgb(241 245 249)"
-          className="chat-input custom-chat-input "
+          className="chat-input custom-chat-input"
           type="text"
           width="100%"
           placeholder="Type anything to chatbot"

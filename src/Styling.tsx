@@ -13,7 +13,63 @@ const ChatDiv= styled.div`
     }
     border-radius:  ${props => props.border_radius};
     border-width:  ${props => props.border_width};
-`;
+    border:  ${props => props.border};
+    .custom-chat-input:focus {
+        outline-width: 0;
+    }
+    .chat-input::placeholder {
+        color: #737373;
+    }
+    * {
+    box-sizing: border-box;
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    scrollbar-width: none;  /* Firefox */
+    }
+
+    *::-webkit-scrollbar {
+      width: 10px;
+      height: 10px;
+      overflow-y:auto;
+    }
+
+    .customized-scrollbar-hide::-webkit-scrollbar {
+      display: none ;
+    }
+
+    .customized-scrollbar::-webkit-scrollbar {
+      width: 10px;
+      height: 10px;
+      overflow-y:auto;
+    }
+
+    *::-webkit-scrollbar-track {
+      border-radius: 100vh;
+      background: #f7f4ed;
+    }
+
+    *::-webkit-scrollbar-thumb {
+      background: #909497;
+      border-radius: 100vh;
+      border: 3px solid #f6f7ed;
+    }
+
+    *::-webkit-scrollbar-thumb:hover {
+      background: #BDC3C7;
+    }
+
+    *, *:before, *:after {
+      box-sizing: border-box;
+    }
+    a {
+        outline: none;
+        text-decoration: none;
+      }
+    a:hover {
+      outline: none;
+      text-decoration: underline;
+      text-decoration-color: #E7E6E2;
+    }
+`;  
 
 const ChatPanelDiv= styled.div`
     height: ${props => props.height};
@@ -232,13 +288,16 @@ const ChatProcessButton = styled.button`
     alt: ${props => props.alt};
     padding-right: ${props => props.padding_right};
     padding-left: ${props => props.padding_left};
+    border: 0;
+    background-color:white;
 `;
 const ChatProcessInput = styled.input`
     width: ${props => props.width};
     padding: ${props => props.padding_y} ${props => props.padding_x};
     background-color:${props =>  props.background_color};
     border-radius: ${props => props.border_radius};
-    width: ${props => props.width}
+    border: 0;
+    width: ${props => props.width};
 `;
 
 const PaddingChatCardWrapperDiv = styled.div`
@@ -247,4 +306,4 @@ const PaddingChatCardWrapperDiv = styled.div`
         padding: ${props => props.lg_padding};
     }
 `;
-export {PaddingChatCardWrapperDiv,ChatProcessButton, ChatProcessInput, ChatProcessDiv,ChatProcessImg, ChatBotBubbleImg,ChatBotBubbleDiv,ChatDiv,ChatPanelDiv,ChatHeaderDiv,ChatDivIcon,ChatIconImg,ChatDivLoading,ChatCardDiv,ChatCardHeader,ChatCardBody,ChatCardContent,ChatBoxDiv,ChatBoxContainerDiv,ChatContainerDiv,ChatErrorDiv,ChatTextDiv };
+export { PaddingChatCardWrapperDiv,ChatProcessButton, ChatProcessInput, ChatProcessDiv,ChatProcessImg, ChatBotBubbleImg,ChatBotBubbleDiv,ChatDiv,ChatPanelDiv,ChatHeaderDiv,ChatDivIcon,ChatIconImg,ChatDivLoading,ChatCardDiv,ChatCardHeader,ChatCardBody,ChatCardContent,ChatBoxDiv,ChatBoxContainerDiv,ChatContainerDiv,ChatErrorDiv,ChatTextDiv };
