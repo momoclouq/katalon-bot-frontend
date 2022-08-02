@@ -31,6 +31,8 @@ export const processIntentData = (data: IntentRecognitionResponse): ChatResponse
 };
 
 export const processSemanticData = (documents: SemanticSearchResponse): ChatResponse => {
+  if (!documents) return null;  
+
   if (Array.isArray(documents) && documents.length > 0) {
     return {
       isBot: true,

@@ -59,6 +59,7 @@ const ChatDiv= styled.div`
 
     *, *:before, *:after {
       box-sizing: border-box;
+      font-family: Arial, Helvetica, sans-serif;
     }
     a {
         outline: none;

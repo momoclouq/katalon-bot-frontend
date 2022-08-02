@@ -69,9 +69,10 @@ const useChatbotQuery = ({query}: { query: string }): ChatbotQueryState => {
       try {
         loadingState();
 
+        const currentQuery = encodeURIComponent(query);
         const response = await axios.get(baseURL, {
           params: {
-            query: query
+            query: currentQuery
           }
         });
   

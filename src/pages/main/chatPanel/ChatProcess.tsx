@@ -104,8 +104,9 @@ const ChatProcess = () => {
     if (isSuccess && result) {
       const output: ChatResponse[] = chatHistory.slice();
 
+      console.log(result);
       output.push(result.intentRecognitionChat);
-      output.push(result.semanticSearchChat);
+      if (result.semanticSearchChat) output.push(result.semanticSearchChat);
 
       setChatHistory(output);
     }
