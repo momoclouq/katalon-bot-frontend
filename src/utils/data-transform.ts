@@ -1,53 +1,52 @@
 import { ChatResponse } from "../typings/ChatBot";
 import { IntentRecognitionResponse } from "../typings/IntentRecognition";
+import { QueryResponse } from "../typings/RawResponse";
 import { SemanticSearchResponse } from "../typings/SemanticSearch";
 
-export const processIntentData = (data: IntentRecognitionResponse): ChatResponse => {
-  if (data === null) return {
+export const processIntentData = (data: QueryResponse): ChatResponse => {
+  if (!data.classified) return {
     isBot: true,
     sentence: 'Looks like we have a difficult question!',
-    recommendations: []
+    recommendations: [],
+    topics: []
   }
 
-  const { classified, id, mainMessage, carouselCards } = data;
-  
-  if (id === "fallback" || !classified)
-    return {
-      isBot: true,
-      sentence: mainMessage,
-      recommendations: [],
-    };
+  const { response, topics } = data as IntentRecognitionResponse;
 
   return {
     isBot: true,
-    sentence: mainMessage,
-    recommendations: carouselCards.map((value) => {
+    sentence: response.response,
+    recommendations: response.carousel.map((value) => {
       return {
         title: value.resource_title,
         url: value.resource_url,
       };
     }),
+    topics
   };
 };
 
-export const processSemanticData = (documents: SemanticSearchResponse): ChatResponse => {
-  if (Array.isArray(documents) && documents.length > 0) {
+export const processSemanticData = (data: QueryResponse): ChatResponse => {
+  if (!data.classified) {
+    const { response, topics } = data as SemanticSearchResponse;
     return {
       isBot: true,
       sentence: '',
-      recommendations: documents.map((document) => {
+      recommendations: response.map((document) => {
         return {
-          title: document.mainMessage,
-          subtitle: document.subMessage,
+          title: document.title,
+          subtitle: document.sentence,
           url: document.url,
         };
       }),
+      topics
     };
   }
 
   return {
     isBot: true,
     sentence: '',
-    recommendations: []
+    recommendations: [],
+    topics: []
   };
 };

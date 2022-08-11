@@ -1,7 +1,8 @@
 export type ChatResponse = {
   isBot: boolean;
   sentence: string;
-  recommendations?: Recommendation[]
+  recommendations?: Recommendation[],
+  topics: string[]
 }
 
 export type UserResponse = ChatResponse;

@@ -1,10 +1,13 @@
-export type CarouselCard = {
-  resource_title: string;
-  resource_url: string;
-}
+export type SemanticSearchResponseItem = {
+  document_id: number;
+  sentence_id: number;
+  title: string;
+  url: string;
+  sentence: string;
+};
 
 export type SemanticSearchResponse = {
-  mainMessage: string;
-  subMessage: string;
-  url: string;
-}[];
+  classified: boolean;
+  response: SemanticSearchResponseItem[];
+  topics: string[];
+}
