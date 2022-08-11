@@ -22,6 +22,8 @@ import DomainRequestChatBox from "./DomainRequestChatBox";
 import useDomain, { DomainState } from "../../../hooks/chatbotHook/useDomain";
 import DomainRegisteredChatBox from "./DomainRegisteredChatBox";
 import InitialRecommendationLists from "./InitialRecommendationList";
+import Icon from "../../../components/chat/botIcon/Icon";
+import logoutIcon from "../../../static/images/logout.png"
 
 const chatInputWrapperStyle = {
   boxShadow: "0 -2px 0  0 rgb(0 0 0 / 0.05)",
@@ -31,7 +33,7 @@ const chatInputWrapperStyle = {
   flexGrow: "grow"
 } as React.CSSProperties;
 
-const ChatInput = ({ domain, submitQuery, addUserChat, setEmail }: any) => {
+const ChatInput = ({ domain, submitQuery, addUserChat, setEmail, resetDomain }: any) => {
   const [currentQuery, setCurrentQuery] = useState("");
 
   const handleClick = () => {
@@ -58,6 +60,9 @@ const ChatInput = ({ domain, submitQuery, addUserChat, setEmail }: any) => {
 
   return (
     <div style={chatInputWrapperStyle}>
+      <ChatProcessButton padding_left="1em">
+        <Icon size="0.5em" onClickFn={resetDomain} url={logoutIcon} />
+      </ChatProcessButton>
       <ChatProcessDiv border_radius="9999px" margin="0.4rem" padding="0.5rem" grow="1" background_color="rgb(241 245 249)" >
         <ChatProcessInput
           value={currentQuery}
@@ -115,9 +120,9 @@ const ChatProcess = () => {
     domainIsLoading, 
     domainHasError,
     domainError,
-    domainIsSuccess,
     domain,
-    setEmail
+    setEmail,
+    resetDomain
   }: DomainState = useDomain();
 
   const { isLoading, hasError, isSuccess, error, result }: ChatbotQueryState =
@@ -135,6 +140,13 @@ const ChatProcess = () => {
       setChatHistory(output);
     }
   }, [result]);
+
+  useEffect(() => {
+    console.log("DDD", domain);
+    if (!domain) {
+      setChatHistory([]);
+    }
+  }, [domain]);
 
   const addUserChatToHistory = (currentQuery: string) => {
     const output: ChatResponse[] = chatHistory.slice();
@@ -161,7 +173,7 @@ const ChatProcess = () => {
           }}
         />
         { !domain ? <DomainRequestChatBox /> : "" }
-        { domainIsSuccess ? <DomainRegisteredChatBox /> : "" }
+        { domain ? <DomainRegisteredChatBox /> : "" }
         { domain ? 
           <>
             <ChatBox
@@ -191,6 +203,7 @@ const ChatProcess = () => {
         submitQuery={setQuery}
         addUserChat={addUserChatToHistory}
         setEmail={setEmail}
+        resetDomain={resetDomain}
       />
     </>
   );

@@ -11,6 +11,7 @@ export type DomainState = {
   domainError?: string;
   setEmail?: any;
   domain?: string | null;
+  resetDomain?: any;
 }
 
 const useDomain = () => {
@@ -21,15 +22,7 @@ const useDomain = () => {
   const [email, setEmail] = useState('notanemail');
   const [domain, setDomain]: [string, any] = useState("");
 
-  const defaultDomain = process.env.defaultDomain || "";
-
-  const loadingState = () => {
-    setIsLoading(true);
-    setHasError(false);
-    setIsSuccess(false);
-    setError('');
-    setDomain("");
-  }
+  const defaultDomain = process.env.defaultDomain || "3d517f8924ac7fd03699a29d97dc52d9";
 
   useEffect(() => {
     let currentDomain = window.localStorage.getItem("userDomain");
@@ -39,6 +32,14 @@ const useDomain = () => {
       setIsSuccess(true);
     }
   }, []);
+
+  const loadingState = () => {
+    setIsLoading(true);
+    setHasError(false);
+    setIsSuccess(false);
+    setError('');
+    setDomain("");
+  }
 
   const successState = ({ domain }: { domain: string }) => {
     setIsLoading(false);
@@ -55,8 +56,18 @@ const useDomain = () => {
     setHasError(true);
     setIsSuccess(false);
     setError(error);
-    setDomain(defaultDomain);
+    setDomain('');
   } 
+
+  const resetDomain = () => {
+    setIsLoading(false);
+    setHasError(false);
+    setIsSuccess(false);
+    setError('');
+    setDomain('');
+    setEmail('notanemail');
+    window.localStorage.removeItem("userDomain");
+  }
 
   useEffect(() => {
     async function queryDomain() {
@@ -84,7 +95,7 @@ const useDomain = () => {
     if(email !== 'notanemail') queryDomain();
   }, [email]);
 
-  return { domainIsLoading, domainIsSuccess, domainHasError, domainError, domain, setEmail };
+  return { domainIsLoading, domainIsSuccess, domainHasError, domainError, domain, setEmail, resetDomain };
 }
 
 export default useDomain;

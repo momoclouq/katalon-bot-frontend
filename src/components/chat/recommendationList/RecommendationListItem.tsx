@@ -5,6 +5,7 @@ const ListItem = styled.div`
   text-align: center;
   color: #4895EF;
   border-top: 0.1px solid #EAEAEA;
+  cursor: pointer;
 `
 
 const RecommendationListItem = ({ onClickAction, displayQuery, query }) => {
