@@ -40,7 +40,7 @@ const DomainRequestChatBox = ({ submitEmail }) => {
         </ChatBoxDiv>
         <ChatText case="bot">
           <div>Enter your email address or leave it empty to get started</div>
-          <EmailInput onChange={handleChange} placeHolder="your email" type="text" />
+          <EmailInput onChange={handleChange} placeholder="your email" type="text" />
           <EmailSubmitBtn onClick={() => { submitEmail(email); }}>Confirm email</EmailSubmitBtn>
         </ChatText> 
       </ChatBoxDiv>
