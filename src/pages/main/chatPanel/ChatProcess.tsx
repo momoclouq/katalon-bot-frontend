@@ -33,16 +33,13 @@ const chatInputWrapperStyle = {
   flexGrow: "grow"
 } as React.CSSProperties;
 
-const ChatInput = ({ domain, submitQuery, addUserChat, setEmail, resetDomain }: any) => {
+const ChatInput = ({ domain, submitQuery, addUserChat, resetDomain }: any) => {
   const [currentQuery, setCurrentQuery] = useState("");
 
   const handleClick = () => {
     if(domain){
       addUserChat(currentQuery);
       submitQuery(currentQuery);
-      setCurrentQuery("");
-    } else {
-      setEmail(currentQuery);
       setCurrentQuery("");
     }
   };
@@ -58,6 +55,8 @@ const ChatInput = ({ domain, submitQuery, addUserChat, setEmail, resetDomain }: 
     setCurrentQuery(event.target.value);
   };
 
+  const attributes = domain ? {} : { disabled: 'disabled' };
+
   return (
     <div style={chatInputWrapperStyle}>
       <ChatProcessButton padding_left="1em">
@@ -65,6 +64,7 @@ const ChatInput = ({ domain, submitQuery, addUserChat, setEmail, resetDomain }: 
       </ChatProcessButton>
       <ChatProcessDiv border_radius="9999px" margin="0.4rem" padding="0.5rem" grow="1" background_color="rgb(241 245 249)" >
         <ChatProcessInput
+          {...attributes}
           value={currentQuery}
           onChange={handleChange}
           padding_y="0.25rem"
@@ -142,7 +142,6 @@ const ChatProcess = () => {
   }, [result]);
 
   useEffect(() => {
-    console.log("DDD", domain);
     if (!domain) {
       setChatHistory([]);
     }
@@ -172,10 +171,10 @@ const ChatProcess = () => {
             topics: []
           }}
         />
-        { !domain ? <DomainRequestChatBox /> : "" }
-        { domain ? <DomainRegisteredChatBox /> : "" }
+        { !domain ? <DomainRequestChatBox submitEmail={(currentEmail) => { setEmail(currentEmail); }} /> : "" }
         { domain ? 
           <>
+            <DomainRegisteredChatBox />
             <ChatBox
               chatData={{
                 isBot: true,
@@ -202,7 +201,6 @@ const ChatProcess = () => {
         domain={domain}
         submitQuery={setQuery}
         addUserChat={addUserChatToHistory}
-        setEmail={setEmail}
         resetDomain={resetDomain}
       />
     </>

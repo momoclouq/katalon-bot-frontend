@@ -27,6 +27,13 @@ const useDomain = () => {
   useEffect(() => {
     let currentDomain = window.localStorage.getItem("userDomain");
 
+    //add event listener to storage changes, listen for email changes
+    window.addEventListener('storage', (event: StorageEvent) => {
+      if(event.key === 'userEmail') {
+        setEmail(event.newValue);
+      }
+    });
+
     if(currentDomain) {
       setDomain(currentDomain);
       setIsSuccess(true);
@@ -75,7 +82,9 @@ const useDomain = () => {
         loadingState();
 
         let currentEmail = email.trim();
-        if(!validate(currentEmail) && currentEmail !== "") throw new Error("Your email is not valid, leave it empty to start using the default personalization or enter a valid email");  
+        if(!validate(currentEmail) && currentEmail !== "") {
+          throw new Error("Your email is not valid, leave it empty to start using the default personalization or enter a valid email");  
+        }
   
         const response = await axios.get(baseURL, {
           params: {
