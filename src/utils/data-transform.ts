@@ -6,7 +6,7 @@ import { SemanticSearchResponse } from "../typings/SemanticSearch";
 export const processIntentData = (data: QueryResponse): ChatResponse => {
   if (!data.classified) return {
     isBot: true,
-    sentence: 'Looks like we have a difficult question!',
+    sentence: 'I will look through some official documentations',
     recommendations: [],
     topics: []
   }

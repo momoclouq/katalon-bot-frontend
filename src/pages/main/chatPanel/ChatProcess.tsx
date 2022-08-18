@@ -178,7 +178,7 @@ const ChatProcess = () => {
             <ChatBox
               chatData={{
                 isBot: true,
-                sentence: "Below are some possible topics.",
+                sentence: "Below are some possible topics that you can ask me.",
                 recommendations: undefined,
                 topics: []
               }}
