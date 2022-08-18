@@ -5,7 +5,10 @@ export type CarouselCard = {
 
 export type IntentRecognitionResponse = {
   classified: boolean;
-  id: string,
-  mainMessage: string,
-  carouselCards: CarouselCard[];
-} | null;
+  response: {
+    id: string;
+    response: string;
+    carousel: CarouselCard[]
+  };
+  topics: string[]
+};

@@ -5,7 +5,7 @@ import { ChatResponse } from "../../typings/ChatBot";
 import { QueryResponse } from "../../typings/RawResponse";
 import { processIntentData, processSemanticData } from "../../utils/data-transform";
 
-const baseURL = process.env.baseUrl || "http://localhost:5000/query";
+const baseURL = process.env.REACT_APP_FULL_PIPELINE;
 
 export type ChatResult = {
   intentRecognitionChat: ChatResponse;
@@ -20,20 +20,12 @@ export type ChatbotQueryState = {
   result?: ChatResult | null;
 }
 
-const useChatbotQuery = ({query}: { query: string }): ChatbotQueryState => {
+const useChatbotQuery = ({query, domain}: { query: string; domain: string; }): ChatbotQueryState => {
   const [isLoading, setIsLoading] = useState(false);
   const [hasError, setHasError] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [error, setError] = useState('');
   const [result, setResult]: [ChatResult | null, any] = useState(null);
-
-  const resetState = () => {
-    setIsLoading(false);
-    setHasError(false);
-    setIsSuccess(false);
-    setError('');
-    setResult(null);
-  }
 
   const loadingState = () => {
     setIsLoading(true);
@@ -45,8 +37,8 @@ const useChatbotQuery = ({query}: { query: string }): ChatbotQueryState => {
 
   const successState = (response: QueryResponse) => {
     const result: ChatResult = {
-      semanticSearchChat: processSemanticData(response.semanticSearchData),
-      intentRecognitionChat: processIntentData(response.intentRecognitionData)
+      semanticSearchChat: processSemanticData(response),
+      intentRecognitionChat: processIntentData(response)
     };
     
     setIsLoading(false);
@@ -69,11 +61,9 @@ const useChatbotQuery = ({query}: { query: string }): ChatbotQueryState => {
       try {
         loadingState();
 
-        const currentQuery = encodeURIComponent(query);
-        const response = await axios.get(baseURL, {
-          params: {
-            query: currentQuery
-          }
+        const response = await axios.post(baseURL, {
+          domain: domain,
+          query: query 
         });
   
         successState(response.data as QueryResponse);

@@ -1,4 +1,4 @@
-export type QueryResponse = {
-  semanticSearchData: SemanticSearchResponse
-  intentRecognitionData: IntentRecognitionResponse
-}
+import { IntentRecognitionResponse } from "./IntentRecognition";
+import { SemanticSearchResponse } from "./SemanticSearch";
+
+export type QueryResponse = SemanticSearchResponse | IntentRecognitionResponse;

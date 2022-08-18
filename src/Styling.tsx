@@ -194,6 +194,7 @@ const ChatBoxDiv = styled.div`
     margin-right: ${props => props.margin_right};
     overflow: ${props => props.overflow};
     margin-bottom: ${props => props.margin_bottom};
+    flex-wrap: ${props => props.flex_wrap};
     `;
 
 const ChatBoxContainerDiv = styled.div`
@@ -247,13 +248,13 @@ const ChatTextDiv = styled.div`
     border-radius:  ${props => props.border_radius};
     background-color:${props =>  props.p_case === 'user' ? 'rgb(14 165 233)' : ''};
     color: ${props =>  props.p_case === 'user' ? 'rgb(255 255 255)' : ''};
-    background-color:${props =>  props.p_case === 'bot' ? 'rgb(241 245 249)' : ''};
+    background-color:${props =>  props.p_case === 'bot' ? '#FFFFFF' : ''};
     color: ${props =>  props.p_case === 'bot' ? 'rgb(71 85 105)' : ''};
     background-color:${props =>  props.p_case === 'loading' ? 'rgb(241 245 249)' : ''};
     font-size: ${props =>  props.p_case === 'loading' ? '1.25rem' : ''} ;  
     line-height: ${props =>  props.p_case === 'loading' ? '1.75rem' : ''} ;      
-    background-color:${props =>  props.p_case === 'error' ? 'rgb(153 27 27)' : ''};
-    color: ${props =>  props.p_case === 'error' ? 'rgb(255 255 255) ' : ''};
+    background-color:${props =>  props.p_case === 'error' ? '#FFFFFF' : ''};
+    color: ${props =>  props.p_case === 'error' ? 'rgb(71 85 105)' : ''};
 `;
 
 const ChatBotBubbleDiv = styled.div`

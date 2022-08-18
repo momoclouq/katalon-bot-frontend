@@ -3,13 +3,13 @@ import ChatProcess from "./ChatProcess";
 import { ChatPanelDiv } from "../../../Styling"
 
 const ChatPanel = ({ toogleChatbot }) => {
-    return (
-        <ChatPanelDiv height="100%" flex_direction="column" display="flex">
-          <ChatHeader toogleChatbot={toogleChatbot} />
+  return (
+      <ChatPanelDiv height="100%" flex_direction="column" display="flex">
+        <ChatHeader toogleChatbot={toogleChatbot} />
 
-          <ChatProcess />
-        </ChatPanelDiv>
-    )
+        <ChatProcess />
+      </ChatPanelDiv>
+  )
 }
 
 export default ChatPanel;

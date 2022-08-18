@@ -6,44 +6,21 @@ import ChatCard from "./ChatCard";
 import PaddingChatCardWrapper from "../../wrapper/paddingChatCardWrapper/PaddingChatCardWrapper";
 import { ChatResponse } from "../../../typings/ChatBot";
 import { memo } from "react";
-import React, {  useRef, useEffect, useState, RefObject } from 'react';
+import React, { RefObject } from 'react';
 import { ChatBoxDiv } from "../../../Styling";
-function useScroll() {
-  const [value, setValue] = useState(true);
-  const ref = useRef<HTMLDivElement>(null) || null;
-  let anchor;
-  let anchor_loose;
-  const resetScrolling = () => 
-    { 
-      setValue(false);
-      clearTimeout(anchor);
-      anchor = setTimeout(() => {setValue(true) }, 5000);
-    }
-  const displayScroll = () =>{
-      setValue(false);
-      clearTimeout(anchor_loose);
-      anchor_loose = setTimeout(() => {setValue(true) }, 10000);
-    }
-  useEffect(
-    () => {
-      const node = ref.current;
-      if (node != null) {
-        node.addEventListener("scroll", resetScrolling);
-        node.addEventListener("click", displayScroll);
-        return () => {
-        node.removeEventListener("scroll", resetScrolling);
-        node.addEventListener("click", displayScroll);
-        };
-      }
-    },
-    [ref.current] // Recall only if ref changes
-  );
-  return [ref, value];
-}
+import ChatTopic from "../chatTopic/ChatTopic";
+import useScroll from "../../../hooks/scrollbarHideHook/useScroll";
 
-const ChatBox = memo(({ isBot, sentence, recommendations }: ChatResponse) => {
+type ChatBoxInput = {
+  chatData: ChatResponse;
+  optional?: any
+};
+
+const ChatBox = memo(({ chatData, optional }: ChatBoxInput) => {
+  const { isBot, sentence, recommendations, topics } = chatData;
   const [ref, isScrolled] = useScroll();
-  const displayChat = sentence || 'More similar results';
+  const [ref2, isScrolled2] = useScroll();
+  const displayChat = sentence || 'Here are some more resources to get you started';
 
   const processedChatCards = () => {
     if (!recommendations) return "";
@@ -65,6 +42,14 @@ const ChatBox = memo(({ isBot, sentence, recommendations }: ChatResponse) => {
     });
   };
 
+  const processedTopics = () => {
+    return topics.map((topic, index) => {
+      return (
+        <ChatTopic key={`topic ${index}`} topic={topic} onClickHandler={() => { optional?.createUserQuery(topic) }}/>
+      )
+    })
+  }
+
   if (isBot)
     return (
       <ChatBoxDiv width="100%" padding="0.25rem" align_self="self-start" margin_bottom="0.5rem" >
@@ -77,6 +62,7 @@ const ChatBox = memo(({ isBot, sentence, recommendations }: ChatResponse) => {
         </ChatBoxDiv>
 
         <ChatBoxDiv width="100%" display="flex" overflow="auto" ref={ref as RefObject<HTMLDivElement>} className={`${isScrolled ? `customized-scrollbar-hide`:`customized-scrollbar`}`}>{processedChatCards()}</ChatBoxDiv>
+        <ChatBoxDiv width="100%" display="flex" overflow="auto" ref={ref2 as RefObject<HTMLDivElement>} className={`${isScrolled2 ? `customized-scrollbar-hide`:`customized-scrollbar`}`}>{processedTopics()}</ChatBoxDiv>
       </ChatBoxDiv>
     );
 

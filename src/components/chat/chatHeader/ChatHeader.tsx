@@ -5,7 +5,7 @@ import {ChatHeaderDiv} from "../../../Styling"
 const ChatHeader = ({ toogleChatbot }) => {
   return (
     <ChatHeaderDiv background_color="white" justify_content="space-between" align_items="center" padding="0.5rem 1rem 0.5rem 1rem" display="flex">
-      <ChatHeaderDiv display="flex">
+      <ChatHeaderDiv display="flex" justify_content="space-between" align_items="center">
         <Icon url={bot_icon} />  
         <ChatHeaderDiv margin_left="0.75rem" display="flex" flex_direction="column" >
           <ChatHeaderDiv font_weight="700">Katalon</ChatHeaderDiv>

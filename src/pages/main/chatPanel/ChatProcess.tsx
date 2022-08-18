@@ -18,6 +18,13 @@ import useScrollToElement from "../../../hooks/scrollToEle/ScrollToElement";
 import sendIcon from "../../../static/images/send_message_icon.png";
 import { ChatResponse } from "../../../typings/ChatBot";
 import { ChatProcessDiv,ChatProcessImg,ChatProcessButton,ChatProcessInput } from "../../../Styling";
+import DomainRequestChatBox from "./DomainRequestChatBox";
+import useDomain, { DomainState } from "../../../hooks/chatbotHook/useDomain";
+import DomainRegisteredChatBox from "./DomainRegisteredChatBox";
+import InitialRecommendationLists from "./InitialRecommendationList";
+import Icon from "../../../components/chat/botIcon/Icon";
+import logoutIcon from "../../../static/images/logout.png"
+
 const chatInputWrapperStyle = {
   boxShadow: "0 -2px 0  0 rgb(0 0 0 / 0.05)",
   width: "100%",
@@ -26,13 +33,15 @@ const chatInputWrapperStyle = {
   flexGrow: "grow",
 } as React.CSSProperties;
 
-const ChatInput = ({ submitQuery, addUserChat }: any) => {
+const ChatInput = ({ domain, submitQuery, addUserChat, resetDomain }: any) => {
   const [currentQuery, setCurrentQuery] = useState("");
 
   const handleClick = () => {
-    addUserChat(currentQuery);
-    submitQuery(currentQuery);
-    setCurrentQuery("");
+    if(domain){
+      addUserChat(currentQuery);
+      submitQuery(currentQuery);
+      setCurrentQuery("");
+    }
   };
 
   const handleKeyDown = (event: KeyboardEvent) => {
@@ -46,10 +55,16 @@ const ChatInput = ({ submitQuery, addUserChat }: any) => {
     setCurrentQuery(event.target.value);
   };
 
+  const attributes = domain ? {} : { disabled: 'disabled' };
+
   return (
     <div style={chatInputWrapperStyle}>
+      <ChatProcessButton padding_left="1em">
+        <Icon size="0.5em" onClickFn={resetDomain} url={logoutIcon} />
+      </ChatProcessButton>
       <ChatProcessDiv border_radius="9999px" margin="0.4rem" padding="0.5rem" grow="1" background_color="rgb(241 245 249)" >
         <ChatProcessInput
+          {...attributes}
           value={currentQuery}
           onChange={handleChange}
           padding_y="0.25rem"
@@ -69,7 +84,7 @@ const ChatInput = ({ submitQuery, addUserChat }: any) => {
   );
 };
 
-const ChatDisplay = ({ chatHistory, scrollToView }: { chatHistory: ChatResponse[]; scrollToView: any; }) => {
+const ChatDisplay = ({ chatHistory, scrollToView, createUserQuery }: { chatHistory: ChatResponse[]; scrollToView: any; createUserQuery: any; }) => {
   useEffect(() => {
     scrollToView();
   }, [chatHistory, scrollToView]);
@@ -79,10 +94,16 @@ const ChatDisplay = ({ chatHistory, scrollToView }: { chatHistory: ChatResponse[
     { chatHistory.map((chat, index) => {
         return (
           <ChatBox
+            chatData={{
+              isBot: chat.isBot,
+              sentence: chat.sentence,
+              recommendations: chat.recommendations,
+              topics: chat.topics
+            }}
             key={"box: " + index}
-            isBot={chat.isBot}
-            sentence={chat.sentence}
-            recommendations={chat.recommendations}
+            optional={{
+              createUserQuery
+            }}
           />
         );
       }) 
@@ -95,8 +116,17 @@ const ChatProcess = () => {
   const [query, setQuery] = useState("");
   const [chatHistory, setChatHistory] = useState([] as ChatResponse[]);
 
+  const {
+    domainIsLoading, 
+    domainHasError,
+    domainError,
+    domain,
+    setEmail,
+    resetDomain
+  }: DomainState = useDomain();
+
   const { isLoading, hasError, isSuccess, error, result }: ChatbotQueryState =
-    useChatbotQuery({ query });
+    useChatbotQuery({ query, domain });
 
   const { createAnchorHere, scrollToView } = useScrollToElement()
 
@@ -106,18 +136,25 @@ const ChatProcess = () => {
 
       console.log(result);
       output.push(result.intentRecognitionChat);
-      if (result.semanticSearchChat) output.push(result.semanticSearchChat);
+      if (result.intentRecognitionChat.recommendations.length === 0) output.push(result.semanticSearchChat);
 
       setChatHistory(output);
     }
   }, [result]);
+
+  useEffect(() => {
+    if (!domain) {
+      setChatHistory([]);
+    }
+  }, [domain]);
 
   const addUserChatToHistory = (currentQuery: string) => {
     const output: ChatResponse[] = chatHistory.slice();
 
     output.push({
       isBot: false,
-      sentence: currentQuery.trim()
+      sentence: currentQuery.trim(),
+      topics: []
     });
 
     setChatHistory(output);
@@ -128,18 +165,44 @@ const ChatProcess = () => {
     <>
       <ChatBoxContainer>
         <ChatBox
-          isBot={true}
-          sentence="Hi, I'm Katalon Chatbot. You can ask me anything about Katalon Documentation"
-          recommendations={undefined}
+          chatData={{
+            isBot: true,
+            sentence: "Hey, I'm Katalon Bot, an AI - based chatbot solution. I will answer all of your questions.",
+            recommendations: undefined,
+            topics: []
+          }}
         />
-        <ChatDisplay chatHistory={chatHistory} scrollToView={scrollToView} />
-        {isLoading ? <ChatLoading /> : ""}
+        { !domain ? <DomainRequestChatBox submitEmail={(currentEmail) => { setEmail(currentEmail); }} /> : "" }
+        { domain ? 
+          <>
+            <DomainRegisteredChatBox />
+            <ChatBox
+              chatData={{
+                isBot: true,
+                sentence: "Below are some possible topics that you can ask me.",
+                recommendations: undefined,
+                topics: []
+              }}
+            />
+            <InitialRecommendationLists createUserQuery={(topic) => {
+              addUserChatToHistory(topic);
+              setQuery(topic);
+            }} />
+          </> : "" }
+        <ChatDisplay chatHistory={chatHistory} scrollToView={scrollToView} createUserQuery={(topic) => {
+          addUserChatToHistory(topic);
+          setQuery(topic);
+        }} />
+        {isLoading || domainIsLoading ? <ChatLoading /> : ""}
         {hasError ? <ChatError error={error} /> : ""}
+        {domainHasError ? <ChatError error={domainError} /> : ""}
         {createAnchorHere()}
       </ChatBoxContainer>
       <ChatInput
+        domain={domain}
         submitQuery={setQuery}
         addUserChat={addUserChatToHistory}
+        resetDomain={resetDomain}
       />
     </>
   );
