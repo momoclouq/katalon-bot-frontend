@@ -1,5 +1,6 @@
 {
   "name": "katalon-bot-frontend",
+  "homepage": "https://momoclouq.github.io/katalon-bot-frontend/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
