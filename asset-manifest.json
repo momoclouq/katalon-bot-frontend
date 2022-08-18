@@ -1,16 +1,17 @@
 {
   "files": {
-    "main.css": "/katalon-bot-frontend/static/css/main.9fbb0b9a.css",
-    "main.js": "/katalon-bot-frontend/static/js/main.bbabd8df.js",
-    "static/media/katalon_icon.png": "/katalon-bot-frontend/static/media/katalon_icon.54e27d7afae42961485a.png",
-    "static/media/bot_icon.png": "/katalon-bot-frontend/static/media/bot_icon.4aa552f228885a8681d0.png",
-    "static/media/user_icon.png": "/katalon-bot-frontend/static/media/user_icon.89aaeb263a46bd353262.png",
-    "index.html": "/katalon-bot-frontend/index.html",
-    "main.9fbb0b9a.css.map": "/katalon-bot-frontend/static/css/main.9fbb0b9a.css.map",
-    "main.bbabd8df.js.map": "/katalon-bot-frontend/static/js/main.bbabd8df.js.map"
+    "main.css": "/static/css/main.219d3428.css",
+    "main.js": "/static/js/main.7ded161f.js",
+    "static/media/katalon_icon.png": "/static/media/katalon_icon.54e27d7afae42961485a.png",
+    "static/media/bot_icon.png": "/static/media/bot_icon.356219854576b48eb658.png",
+    "static/media/user_icon.png": "/static/media/user_icon.89aaeb263a46bd353262.png",
+    "static/media/send_message_icon.png": "/static/media/send_message_icon.cce7f972efaf9447fcdf.png",
+    "index.html": "/index.html",
+    "main.219d3428.css.map": "/static/css/main.219d3428.css.map",
+    "main.7ded161f.js.map": "/static/js/main.7ded161f.js.map"
   },
   "entrypoints": [
-    "static/css/main.9fbb0b9a.css",
-    "static/js/main.bbabd8df.js"
+    "static/css/main.219d3428.css",
+    "static/js/main.7ded161f.js"
   ]
 }
