@@ -15,7 +15,6 @@ import useChatbotQuery, {
 } from "../../../hooks/chatbotHook/useChatbotQuery";
 import useScrollToElement from "../../../hooks/scrollToEle/ScrollToElement";
 
-import sendIcon from "../../../static/images/send_message_icon.png";
 import { ChatResponse } from "../../../typings/ChatBot";
 import { ChatProcessDiv,ChatProcessImg,ChatProcessButton,ChatProcessInput } from "../../../Styling";
 import DomainRequestChatBox from "./DomainRequestChatBox";
@@ -23,7 +22,7 @@ import useDomain, { DomainState } from "../../../hooks/chatbotHook/useDomain";
 import DomainRegisteredChatBox from "./DomainRegisteredChatBox";
 import InitialRecommendationLists from "./InitialRecommendationList";
 import Icon from "../../../components/chat/botIcon/Icon";
-import logoutIcon from "../../../static/images/logout.png"
+import { imageMap } from "../../../utils/imageMap";
 
 const chatInputWrapperStyle = {
   boxShadow: "0 -2px 0  0 rgb(0 0 0 / 0.05)",
@@ -60,7 +59,7 @@ const ChatInput = ({ domain, submitQuery, addUserChat, resetDomain }: any) => {
   return (
     <div style={chatInputWrapperStyle}>
       <ChatProcessButton padding_left="1em">
-        <Icon size="0.5em" onClickFn={resetDomain} url={logoutIcon} />
+        <Icon size="0.5em" onClickFn={resetDomain} url={imageMap.logout_icon} />
       </ChatProcessButton>
       <ChatProcessDiv border_radius="9999px" margin="0.4rem" padding="0.5rem" grow="1" background_color="rgb(241 245 249)" >
         <ChatProcessInput
@@ -78,7 +77,7 @@ const ChatInput = ({ domain, submitQuery, addUserChat, resetDomain }: any) => {
         />
       </ChatProcessDiv>
       <ChatProcessButton onClick={handleClick} border_radius="9999px" padding_right="1rem" padding_left="1rem">
-        <ChatProcessImg height="1.25rem" alt="Send Icon" src={sendIcon} />
+        <ChatProcessImg height="1.25rem" alt="Send Icon" src={imageMap.sendIcon} />
       </ChatProcessButton>
     </div>
   );

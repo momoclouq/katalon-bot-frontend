@@ -1,6 +1,4 @@
 import ChatText from "../../typo/chatText/ChatText";
-import bot_icon from "../../../static/images/bot_icon.png";
-import user_icon from "../../../static/images/user_icon.png";
 import Icon from "../botIcon/Icon";
 import ChatCard from "./ChatCard";
 import PaddingChatCardWrapper from "../../wrapper/paddingChatCardWrapper/PaddingChatCardWrapper";
@@ -10,6 +8,7 @@ import React, { RefObject } from 'react';
 import { ChatBoxDiv } from "../../../Styling";
 import ChatTopic from "../chatTopic/ChatTopic";
 import useScroll from "../../../hooks/scrollbarHideHook/useScroll";
+import { imageMap } from "../../../utils/imageMap";
 
 type ChatBoxInput = {
   chatData: ChatResponse;
@@ -55,7 +54,7 @@ const ChatBox = memo(({ chatData, optional }: ChatBoxInput) => {
       <ChatBoxDiv width="100%" padding="0.25rem" align_self="self-start" margin_bottom="0.5rem" >
         <ChatBoxDiv width="80%" display="flex" flex_direction="column" >
           <ChatBoxDiv margin_bottom="0.5rem" display="flex" align_items="center" >
-            <Icon url={bot_icon} />
+            <Icon url={imageMap.bot_icon} />
             <ChatBoxDiv margin_left="0.5rem" color="rgb(120 113 108)" font_weight="400">Katalon</ChatBoxDiv>
           </ChatBoxDiv>
           <ChatText case="bot">{displayChat}</ChatText> 
@@ -71,7 +70,7 @@ const ChatBox = memo(({ chatData, optional }: ChatBoxInput) => {
       <ChatBoxDiv align_items="flex-end" display="flex" flex_direction="column" >
         <ChatBoxDiv align_items="center" display="flex" margin_bottom="0.5rem">
           <ChatBoxDiv margin_right="0.5rem" color="rgb(120 113 108)" font_weight="400" >You</ChatBoxDiv>
-          <Icon url={user_icon} />
+          <Icon url={imageMap.user_icon} />
         </ChatBoxDiv>
         <ChatText case="user">{sentence}</ChatText>
       </ChatBoxDiv>

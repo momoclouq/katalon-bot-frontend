@@ -1,9 +1,9 @@
 import Icon from "../../../components/chat/botIcon/Icon";
 import ChatText from "../../../components/typo/chatText/ChatText";
 import { ChatBoxDiv } from "../../../Styling";
-import bot_icon from "../../../static/images/bot_icon.png";
 import styled from 'styled-components';
 import { useState } from "react";
+import { imageMap } from "../../../utils/imageMap";
 
 const EmailInput = styled.input`
   border-radius: 0.5em;
@@ -36,7 +36,7 @@ const DomainRequestChatBox = ({ submitEmail }) => {
     <ChatBoxDiv width="100%" padding="0.25rem" align_self="self-start" margin_bottom="0.5rem" >
       <ChatBoxDiv width="80%" display="flex" flex_direction="column" >
         <ChatBoxDiv margin_bottom="0.5rem" display="flex" align_items="center" >
-          <Icon url={bot_icon} />
+          <Icon url={imageMap.bot_icon} />
           <ChatBoxDiv margin_left="0.5rem" color="rgb(120 113 108)" font_weight="400">Katalon</ChatBoxDiv>
         </ChatBoxDiv>
         <ChatText case="bot">
