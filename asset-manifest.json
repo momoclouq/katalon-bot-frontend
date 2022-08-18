@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/static/css/main.219d3428.css",
-    "main.js": "/static/js/main.7ded161f.js",
+    "main.css": "/static/css/main.3c3a2208.css",
+    "main.js": "/static/js/main.f63930bf.js",
     "static/media/katalon_icon.png": "/static/media/katalon_icon.54e27d7afae42961485a.png",
     "static/media/bot_icon.png": "/static/media/bot_icon.356219854576b48eb658.png",
     "static/media/user_icon.png": "/static/media/user_icon.89aaeb263a46bd353262.png",
     "static/media/send_message_icon.png": "/static/media/send_message_icon.cce7f972efaf9447fcdf.png",
     "index.html": "/index.html",
-    "main.219d3428.css.map": "/static/css/main.219d3428.css.map",
-    "main.7ded161f.js.map": "/static/js/main.7ded161f.js.map"
+    "main.3c3a2208.css.map": "/static/css/main.3c3a2208.css.map",
+    "main.f63930bf.js.map": "/static/js/main.f63930bf.js.map"
   },
   "entrypoints": [
-    "static/css/main.219d3428.css",
-    "static/js/main.7ded161f.js"
+    "static/css/main.3c3a2208.css",
+    "static/js/main.f63930bf.js"
   ]
 }
