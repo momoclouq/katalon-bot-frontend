@@ -1,4 +1,3 @@
-import './index.css';
 import App from './App';
 import { render } from 'react-dom';
 import { StyleSheetManager } from 'styled-components';

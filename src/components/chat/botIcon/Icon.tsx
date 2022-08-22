@@ -27,7 +27,7 @@ const Icon = ({url, onClickFn, size}: { url: string; onClickFn?: any; size?: str
         <ChatDivIcon onClick={onClickFn} height={size} >
             <ChatIconImg height="100%" src={url} alt="icon" />
         </ChatDivIcon>
-    )
+    );
 }
 
 export default Icon;
