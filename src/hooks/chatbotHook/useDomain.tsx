@@ -29,8 +29,9 @@ const useDomain = () => {
 
     //add event listener to storage changes, listen for email changes
     window.addEventListener('storage', (event: StorageEvent) => {
-      if(event.key === 'userEmail') {
-        setEmail(event.newValue);
+      const currentEmail = window.localStorage.getItem('userEmail');
+      if(currentEmail) {
+        setEmail(currentEmail);
       }
     });
 

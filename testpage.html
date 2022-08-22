@@ -2,13 +2,30 @@
 
 <head>
   <title>Chatbot</title>
+  <!-- https://katalon-chatbot-embedded.s3.ap-southeast-1.amazonaws.com/main.3c3a2208.css -->
+  <!-- https://katalon-chatbot-embedded.s3.ap-southeast-1.amazonaws.com/main.a5e25e31.js -->
   <link rel="stylesheet" href="https://katalon-chatbot-embedded.s3.ap-southeast-1.amazonaws.com/main.3c3a2208.css" />
 </head>
 
 <body>
+  <button id="addEmailBtn">Change email to email@gmail.com</button>
+  <button id="removeEmailBtn">Remove email</button>
   <div id="katalonChatbot"></div>
 
-  <script src="https://katalon-chatbot-embedded.s3.ap-southeast-1.amazonaws.com/main.4afbd584.js"></script>
+  <script src="https://katalon-chatbot-embedded.s3.ap-southeast-1.amazonaws.com/main.a5e25e31.js"></script>
+  <script>
+    const addEmailBtn = document.getElementById('addEmailBtn');
+    addEmailBtn.addEventListener('click', () => {
+      window.localStorage.setItem('userEmail', 'email@gmail.com');
+      window.dispatchEvent(new Event('storage'));
+    });
+
+    const removeEmailBtn = document.getElementById('removeEmailBtn');
+    removeEmailBtn.addEventListener('click', () => {
+      window.localStorage.removeItem('userEmail');
+      window.dispatchEvent(new Event('storage'));
+    });
+  </script>
 </body>
 
 </html>
