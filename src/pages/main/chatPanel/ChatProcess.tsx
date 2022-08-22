@@ -16,13 +16,45 @@ import useChatbotQuery, {
 import useScrollToElement from "../../../hooks/scrollToEle/ScrollToElement";
 
 import { ChatResponse } from "../../../typings/ChatBot";
-import { ChatProcessDiv,ChatProcessImg,ChatProcessButton,ChatProcessInput } from "../../../Styling";
+import styled from 'styled-components'
 import DomainRequestChatBox from "./DomainRequestChatBox";
 import useDomain, { DomainState } from "../../../hooks/chatbotHook/useDomain";
 import DomainRegisteredChatBox from "./DomainRegisteredChatBox";
 import InitialRecommendationLists from "./InitialRecommendationList";
 import Icon from "../../../components/chat/botIcon/Icon";
 import { imageMap } from "../../../utils/imageMap";
+
+const ChatProcessDiv = styled.div`
+    width: ${props => props.width};
+    padding: ${props => props.padding};
+    border-radius: ${props => props.border_radius};
+    margin: ${props => props.margin};
+    background-color:${props =>  props.background_color};
+    flex-grow: ${props => props.grow};
+`;
+
+const ChatProcessImg = styled.img`
+    height: ${props => props.height};
+    src: ${props => props.src};
+    alt: ${props => props.alt};
+`;
+const ChatProcessButton = styled.button`
+    height: ${props => props.height};
+    src: ${props => props.src};
+    alt: ${props => props.alt};
+    padding-right: ${props => props.padding_right};
+    padding-left: ${props => props.padding_left};
+    border: ${props => props.border} ;
+    background-color: ${props => props.bg_color};
+`;
+const ChatProcessInput = styled.input`
+    width: ${props => props.width};
+    padding: ${props => props.padding_y} ${props => props.padding_x};
+    background-color:${props =>  props.background_color};
+    border-radius: ${props => props.border_radius};
+    border:  ${props => props.border} ;
+    width: ${props => props.width};
+`;
 
 const chatInputWrapperStyle = {
   boxShadow: "0 -2px 0  0 rgb(0 0 0 / 0.05)",
@@ -58,7 +90,7 @@ const ChatInput = ({ domain, submitQuery, addUserChat, resetDomain }: any) => {
 
   return (
     <div style={chatInputWrapperStyle}>
-      <ChatProcessButton padding_left="1em">
+      <ChatProcessButton bg_color="white" border="0" padding_left="1em">
         <Icon size="0.5em" onClickFn={resetDomain} url={imageMap.logout_icon} />
       </ChatProcessButton>
       <ChatProcessDiv border_radius="9999px" margin="0.4rem" padding="0.5rem" grow="1" background_color="rgb(241 245 249)" >
@@ -73,6 +105,7 @@ const ChatInput = ({ domain, submitQuery, addUserChat, resetDomain }: any) => {
           type="text"
           width="100%"
           placeholder="Type anything to chatbot"
+          border="0"
           onKeyDown={handleKeyDown}
         />
       </ChatProcessDiv>

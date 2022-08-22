@@ -1,7 +1,61 @@
 import { Recommendation } from "../../../typings/ChatBot";
 import Icon from "../botIcon/Icon";
-import { ChatCardDiv,ChatCardHeader,ChatCardBody,ChatCardContent } from "../../../Styling";
+import styled from 'styled-components'
 import { imageMap } from "../../../utils/imageMap";
+
+const ChatCardDiv= styled.div`
+    background-color: ${props => props.background_color};
+    width: ${props => props.width};
+    min-height: ${props => props.min_height};
+    @media (min-width: 1024px) {
+        width: ${props => props.lg_width};
+    }
+    border-radius:  ${props => props.border_radius};
+    filter:${props => props.shadow_drop} ;
+    flex-direction: ${props => props.flex_direction};
+    display: ${props => props.display};    
+`;
+
+
+const ChatCardHeader= styled.div`
+    justify-content:  ${props => props.justify_content};
+    align-items: ${props => props.align_items};
+    padding: ${props => props.padding}; 
+    display: ${props => props.display};
+`;
+
+const ChatCardBody= styled.div`
+    background-color: ${props => props.background_color};
+    width: ${props => props.width};
+    @media (max-width: 600px ) {
+        padding-left: ${props => props.lg_padding_left};
+        padding-right: ${props => props.lg_padding_right};
+    }
+    border-radius:  ${props => props.border_radius};
+    align-items: ${props => props.align_items};
+    padding: ${props => props.padding}; 
+    flex-direction: ${props => props.flex_direction};
+    display: ${props => props.display};
+    flex-grow: ${props => props.grow};
+    border-bottom-right-radius: ${props => props.rounded_r_lg};
+    border-bottom-left-radius: ${props => props.rounded_l_lg};
+    color: ${props => props.color};
+    background-color:${props => props.background_color});
+`;
+
+const ChatCardContent= styled.div`
+    width: ${props => props.width};
+    text-align: ${props => props.text_center};
+    overflow-wrap: ${props => props.break_word};
+    padding: ${props => props.padding} ;
+    color: ${props => props.color};
+    @media (min-width: 1024px) {
+        font-size: 0.875rem; /* 14px */
+        line-height: 1.25rem; /* 20px */
+    }
+`;
+
+
 const ChatCard = ({title, subtitle, url}: Recommendation) => {
     return (
         <a href={url}>

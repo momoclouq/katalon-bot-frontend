@@ -1,4 +1,3 @@
-import "tw-elements";
 import data from "../../../static/data/CardData.json";
 
 const BasicCarousel = ({ children, carousel_id }: any) => {

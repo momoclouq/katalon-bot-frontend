@@ -1,4 +1,3 @@
-import 'tw-elements';
 import React, { useRef, useEffect, useState, RefObject } from 'react';
 
 function useHover() {

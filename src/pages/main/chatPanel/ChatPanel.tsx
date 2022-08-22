@@ -1,6 +1,12 @@
 import ChatHeader from "../../../components/chat/chatHeader/ChatHeader";
 import ChatProcess from "./ChatProcess";
-import { ChatPanelDiv } from "../../../Styling"
+import styled from 'styled-components'
+
+const ChatPanelDiv= styled.div`
+    height: ${props => props.height};
+    flex-direction: ${props => props.flex_direction};
+    display: ${props => props.display};
+`;
 
 const ChatPanel = ({ toogleChatbot }) => {
   return (

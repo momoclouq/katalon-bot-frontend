@@ -1,5 +1,19 @@
-import { ChatBotBubbleDiv,ChatBotBubbleImg } from "../../Styling";
+import styled from 'styled-components'
 import { imageMap } from "../../utils/imageMap";
+
+const ChatBotBubbleDiv = styled.div`
+    height: ${props => props.height};
+    @media (min-width: 768px) { 
+        height: ${props => props.md_height};
+    }
+`;
+
+const ChatBotBubbleImg = styled.img`
+    height: ${props => props.height};
+    src: ${props => props.src};
+    alt: ${props => props.alt};
+`;
+
 const positionStyle = (shouldDisplay) => ({
   position: "fixed",
   bottom: "1em",

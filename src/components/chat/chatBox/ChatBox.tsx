@@ -5,10 +5,27 @@ import PaddingChatCardWrapper from "../../wrapper/paddingChatCardWrapper/Padding
 import { ChatResponse } from "../../../typings/ChatBot";
 import { memo } from "react";
 import React, { RefObject } from 'react';
-import { ChatBoxDiv } from "../../../Styling";
+import styled from 'styled-components'
 import ChatTopic from "../chatTopic/ChatTopic";
 import useScroll from "../../../hooks/scrollbarHideHook/useScroll";
 import { imageMap } from "../../../utils/imageMap";
+
+const ChatBoxDiv = styled.div`
+    flex-direction: ${props => props.flex_direction};
+    display: ${props => props.display};
+    align-self: ${props => props.align_self};
+    width: ${props => props.width};
+    font-weight: ${props => props.font_weight};
+    align-items: ${props => props.align_items};
+    width: ${props => props.width};
+    padding: ${props => props.padding};
+    color: ${props => props.color};
+    margin-left: ${props => props.margin_left};
+    margin-right: ${props => props.margin_right};
+    overflow: ${props => props.overflow};
+    margin-bottom: ${props => props.margin_bottom};
+    flex-wrap: ${props => props.flex_wrap};
+`;
 
 type ChatBoxInput = {
   chatData: ChatResponse;
