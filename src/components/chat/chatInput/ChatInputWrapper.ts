@@ -6,6 +6,7 @@ const ChatInputWrapper = styled.div`
   display: flex;
   align-items: center;
   flex-grow: grow;
+  background-color: #FFFFFF;
 `;
 
 export default ChatInputWrapper;
