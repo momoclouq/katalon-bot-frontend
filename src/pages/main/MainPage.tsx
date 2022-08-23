@@ -89,7 +89,7 @@ const relativePositionStyle = {
 const MainPage = ({ shouldDisplay, toogleChatbot }: any) => {
     return (
       <ChatDiv style={fixedPositionStyle(shouldDisplay) as any} height="83vh" width="83vw" max_height="700px" max_width="500px">
-        <ChatDiv style={relativePositionStyle as any}  border= "2px solid #f1f1f1" height="100%" width="100%" sm_font_size="0.875rem" sm_line_height="1.25rem" lg_font_size="1.125rem" lg_line_height="1.75rem" border_radius="0.25rem" border_width="2px">
+        <ChatDiv style={relativePositionStyle as any} border="0.5px solid #d7dbd8" height="100%" width="100%" sm_font_size="0.875rem" sm_line_height="1.25rem" lg_font_size="1.125rem" lg_line_height="1.75rem" border_radius="0.25rem" border_width="2px">
           <ChatPanel toogleChatbot={toogleChatbot} />
         </ChatDiv>
       </ChatDiv>
