@@ -2,12 +2,12 @@
 
 ## Deployment
 
-[Current Katalon chatbot website](https://momoclouq.github.io/katalon-bot-frontend/)
+[Current Katalon chatbot website](https://momoclouq.github.io/rmit-demo/)
 
 ## How to add the chatbot to the current webapp
 The template HTML file is `testpage.html`, which can be found directly in the repo
 1. Add the css file: `<link rel="stylesheet" href="https://d34xspf5ar41hj.cloudfront.net/main.3c3a2208.css" />`
-2. Add the js file: `<script src="https://d34xspf5ar41hj.cloudfront.net/main.6fdc7cfe.js"></script>`
+2. Add the js file: `<script src="https://d34xspf5ar41hj.cloudfront.net/main.9c15216d.js"></script>`
 3. Add the element to store the chatbot, which is any element with the id 'katalonChatbot': `<div id="katalonChatbot"></div>`
 
 ## How to run the project locally
